@@ -1,0 +1,178 @@
+/* ------------------- ESTILOS GENERALES ------------------- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+/* ------------------- MENÚ ------------------- */
+nav {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 3px 12px rgba(245, 158, 11, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fbbf24;
+  text-shadow: 0 0 12px #f59e0b;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fbbf24;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #a855f7;
+  text-shadow: 0 0 12px #a855f7;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #a855f7);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* ------------------- TITULOS ------------------- */
+h1, h2 {
+  text-align: center;
+  color: #f59e0b;
+  text-shadow: 0 0 15px #f59e0b, 0 0 25px #a855f7;
+  margin-top: 40px;
+}
+
+/* ------------------- FORMULARIO ------------------- */
+form {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: #111;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+form:hover {
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.9), 0 0 40px rgba(168, 85, 247, 0.7);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #fbbf24;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 2px solid #a855f7;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border: 2px solid #fbbf24;
+  box-shadow: 0 0 15px #fbbf24, 0 0 25px #a855f7;
+  outline: none;
+}
+
+button {
+  background: linear-gradient(90deg, #f59e0b, #a855f7);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #f59e0b, 0 0 30px #a855f7;
+}
+
+/* ------------------- SECCIONES ------------------- */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px auto;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+
+.feature-card {
+  background: #111;
+  border-radius: 12px;
+  padding: 30px;
+  flex: 1 1 250px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px #f59e0b, 0 0 35px #a855f7;
+}
+
+.feature-card h3 {
+  margin-top: 15px;
+  color: #fbbf24;
+}
+
+.feature-card p {
+  color: #ccc;
+}
+
+/* ------------------- FOOTER ------------------- */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #aaa;
+  margin-top: 40px;
+  border-top: 2px solid #a855f7;
+}

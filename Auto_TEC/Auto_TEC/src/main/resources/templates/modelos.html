@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelos - Autos Hyper Exclusivos</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --clr-bg-dark: #212121;
+      --clr-text-orange: #FFC107;
+      --clr-text-white: #727070;
+      --clr-btn-yellow: #FFC107;
+      --clr-btn-green: #28A745;
+      --clr-btn-cyan: #17A2B8;
+      --clr-border-purple: #800080;
+      --clr-neon-purple: #BF00FF;
+      --clr-skin-tone: #F5E8C7;
+    }
+
+    body {
+      background-color: var(--clr-bg-dark);
+      color: var(--clr-text-white);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding-top: 56px;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      background-color: var(--clr-bg-dark);
+      box-shadow: 0 3px 10px rgba(183, 138, 3, 0.736);
+      position: sticky;
+      top: 0;
+      z-index: 1100;
+      overflow: hidden;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: var(--clr-text-orange);
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link.active {
+      font-weight: 700;
+      border-bottom: 2px solid var(--clr-text-orange);
+    }
+
+    .navbar-brand::after,
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: -100%;
+      background: linear-gradient(90deg, transparent, var(--clr-skin-tone), var(--clr-neon-purple), transparent);
+      animation: colorPeel 4s infinite linear;
+    }
+
+    .nav-link:hover::after,
+    .navbar-brand:hover::after {
+      left: 0;
+    }
+
+    @keyframes colorPeel {
+      0% { left: -100%; }
+      25% { left: 0; background: linear-gradient(90deg, transparent, var(--clr-skin-tone), var(--clr-neon-purple), transparent); }
+      50% { left: 0; background: linear-gradient(90deg, transparent, var(--clr-neon-purple), var(--clr-skin-tone), transparent); }
+      75% { left: 100%; background: linear-gradient(90deg, transparent, var(--clr-skin-tone), var(--clr-neon-purple), transparent); }
+      100% { left: 100%; }
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 2rem 0;
+      font-weight: bold;
+      color: var(--clr-text-orange);
+    }
+
+    .financing-section {
+      text-align: center;
+      padding: 2rem;
+      border: 2px solid var(--clr-border-purple);
+      border-radius: 10px;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .financing-section h2 {
+      margin-bottom: 2rem;
+    }
+
+    .btn-group-sm {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 2px solid currentColor;
+      color: var(--clr-text-white);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      line-height: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-sm i {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .btn-sm:hover {
+      background-color: currentColor;
+      transform: scale(1.1);
+    }
+
+    .btn-yellow { color: var(--clr-btn-yellow); }
+    .btn-green { color: var(--clr-btn-green); }
+    .btn-cyan { color: var(--clr-btn-cyan); }
+
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(129, 129, 129, 0.8);
+      background-color: #424242;
+      color: var(--clr-text-white);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(25, 23, 23, 0.5);
+    }
+
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    .card-title {
+      font-weight: 700;
+      color: var(--clr-text-orange);
+    }
+
+    .card-text,
+    .card p {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Autos Hyper Exclusivos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu"
+        aria-expanded="false" aria-label="Alternar navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="modelos.html">Modelos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ventas.html">Ventas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="servicios.html">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="financiamiento.html">Financiamiento</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestion.html">Gestión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="section-title">Modelos Hyper Exclusivos</h1>
+
+  <div class="container my-5 pt-2">
+   <div class="row row-cols-1 row-cols-md-4 g-4">
+  <!-- Card 1 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/chiron.jpg" class="card-img-top" alt="Bugatti Chiron Super Sport" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Chiron Super Sport</h5>
+        <p><strong>Velocidad:</strong> 490 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1600 HP</p>
+        <p>El Chiron Super Sport es un homenaje a la velocidad extrema, inspirado en los récords de Bugatti desde los años 20.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Chiron Super Sport')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Chiron Super Sport')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Chiron Super Sport','Motor W16 8.0L, 1600 HP, 0-100 km/h en 2.3s, Precio: $3.9M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/jesko.jpg" class="card-img-top" alt="Koenigsegg Jesko" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Koenigsegg Jesko</h5>
+        <p><strong>Velocidad:</strong> 480 km/h</p>
+        <p><strong>Motor:</strong> V8 5.0L Twin-Turbo – 1600 HP</p>
+        <p>El Jesko fue diseñado para dominar tanto las pistas como las autopistas, heredando la innovación del Agera RS.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Koenigsegg Jesko')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Koenigsegg Jesko')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Koenigsegg Jesko','Motor V8 5.0L Twin-Turbo, 1600 HP, 0-100 km/h en 2.5s, Precio: $3M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/speedtail.jpeg" class="card-img-top" alt="McLaren Speedtail" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">McLaren Speedtail</h5>
+        <p><strong>Velocidad:</strong> 403 km/h</p>
+        <p><strong>Motor:</strong> Híbrido V8 Twin-Turbo – 1050 HP</p>
+        <p>El Speedtail representa la visión futurista de McLaren, fusionando lujo con aerodinámica extrema.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('McLaren Speedtail')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('McLaren Speedtail')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('McLaren Speedtail','Motor Híbrido V8 Twin-Turbo, 1050 HP, 0-100 km/h en 2.9s, Precio: $2.2M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/sf90.jpeg" class="card-img-top" alt="Ferrari SF90 Stradale" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Ferrari SF90 Stradale</h5>
+        <p><strong>Velocidad:</strong> 340 km/h</p>
+        <p><strong>Motor:</strong> V8 Híbrido – 1000 HP</p>
+        <p>Primer híbrido enchufable de Ferrari, combina tradición con innovación en un superdeportivo de nueva era.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Ferrari SF90 Stradale')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Ferrari SF90 Stradale')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Ferrari SF90 Stradale','Motor V8 Híbrido 1000 HP, 0-100 km/h en 2.5s, Precio: $625K')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/sian.jpeg" class="card-img-top" alt="Lamborghini Sián" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Lamborghini Sián</h5>
+        <p><strong>Velocidad:</strong> 355 km/h</p>
+        <p><strong>Motor:</strong> V12 híbrido – 819 HP</p>
+        <p>El Sián es el primer híbrido de Lamborghini, combinando brutalidad clásica con tecnología eléctrica moderna.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Lamborghini Sián')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Lamborghini Sián')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Lamborghini Sián','Motor V12 híbrido, 819 HP, 0-100 km/h en 2.8s, Precio: $3.6M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/veyron.jpeg" class="card-img-top" alt="Bugatti Veyron" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Veyron</h5>
+        <p><strong>Velocidad:</strong> 407 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1200 HP</p>
+        <p>El Veyron marcó un antes y un después en la ingeniería automotriz, considerado el auto que redefinió la hiperdeportividad moderna.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Veyron')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Veyron')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Veyron','Motor W16 8.0L, 1200 HP, 0-100 km/h en 2.5s, Precio: $2M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 7 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/divo.jpeg" class="card-img-top" alt="Bugatti Divo" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Divo</h5>
+        <p><strong>Velocidad:</strong> 380 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1500 HP</p>
+        <p>Diseñado para la agilidad, el Divo se enfoca en curvas y aerodinámica extrema, siendo un Bugatti hecho para circuitos.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Divo')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Divo')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Divo','Motor W16 8.0L, 1500 HP, 0-100 km/h en 2.4s, Precio: $5.8M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 8 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/centodieci.jpeg" class="card-img-top" alt="Bugatti Centodieci" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Centodieci</h5>
+        <p><strong>Velocidad:</strong> 380 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1600 HP</p>
+        <p>Una edición limitada que rinde homenaje al Bugatti EB110, combinando lujo, potencia y exclusividad (solo 10 unidades).</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Centodieci')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Centodieci')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Centodieci','Motor W16 8.0L, 1600 HP, 0-100 km/h en 2.4s, Precio: $9M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 9 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/bolide.jpeg" class="card-img-top" alt="Bugatti Bolide" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Bolide</h5>
+        <p><strong>Velocidad:</strong> 500+ km/h (estimada)</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1850 HP</p>
+        <p>Creado como prototipo de pista, el Bolide representa el máximo potencial de Bugatti en velocidad y ligereza extrema.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Bolide')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Bolide')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Bolide','Motor W16 8.0L, 1850 HP, 0-100 km/h en 2.2s, Precio: $4M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 10 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/bugatti_la_voiture_noire.jpeg" class="card-img-top" alt="Bugatti La Voiture Noire" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti La Voiture Noire</h5>
+        <p><strong>Velocidad:</strong> 420 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1500 HP</p>
+        <p>La Voiture Noire es el Bugatti más caro jamás fabricado, una pieza única que combina diseño y exclusividad absoluta.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti La Voiture Noire')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti La Voiture Noire')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti La Voiture Noire','Motor W16 8.0L, 1500 HP, 0-100 km/h en 2.4s, Precio: $18.7M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 11 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/mistral.jpeg" class="card-img-top" alt="Bugatti Mistral" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Bugatti Mistral</h5>
+        <p><strong>Velocidad:</strong> 420 km/h</p>
+        <p><strong>Motor:</strong> W16 8.0L Quad-Turbo – 1600 HP</p>
+        <p>El último Bugatti roadster con motor W16, diseñado como homenaje al fin de una era antes de la electrificación de la marca.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Bugatti Mistral')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Bugatti Mistral')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Bugatti Mistral','Motor W16 8.0L, 1600 HP, 0-100 km/h en 2.5s, Precio: $5M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 12 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/aventador.jpg" class="card-img-top" alt="Lamborghini Aventador SVJ" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Lamborghini Aventador SVJ</h5>
+        <p><strong>Velocidad:</strong> 350 km/h</p>
+        <p><strong>Motor:</strong> V12 6.5L – 770 HP</p>
+        <p>El Aventador SVJ es un ícono del diseño extremo de Lamborghini, famoso por batir récords en Nürburgring.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Lamborghini Aventador SVJ')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Lamborghini Aventador SVJ')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Lamborghini Aventador SVJ','Motor V12 6.5L, 770 HP, 0-100 km/h en 2.8s, Precio: $517,000')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 13 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/sian.jpeg" class="card-img-top" alt="Lamborghini Sián FKP 37" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Lamborghini Sián FKP 37</h5>
+        <p><strong>Velocidad:</strong> 355 km/h</p>
+        <p><strong>Motor:</strong> V12 6.5L Híbrido – 819 HP</p>
+        <p>El primer Lamborghini híbrido, mezcla brutal de diseño futurista y tecnología eléctrica inspirada en supercondensadores.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Lamborghini Sián FKP 37')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Lamborghini Sián FKP 37')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Lamborghini Sián FKP 37','Motor V12 híbrido, 819 HP, 0-100 km/h en 2.8s, Precio: $3.6M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 14 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/countach.jpeg" class="card-img-top" alt="Lamborghini Countach LPI 800-4" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Lamborghini Countach LPI 800-4</h5>
+        <p><strong>Velocidad:</strong> 355 km/h</p>
+        <p><strong>Motor:</strong> V12 6.5L Híbrido – 802 HP</p>
+        <p>Una reinterpretación moderna del clásico Countach, producido en edición limitada de solo 112 unidades.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Lamborghini Countach LPI 800-4')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Lamborghini Countach LPI 800-4')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Lamborghini Countach LPI 800-4','Motor V12 híbrido, 802 HP, 0-100 km/h en 2.7s, Precio: $2.6M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 15 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/ccxr.jpeg" class="card-img-top" alt="Koenigsegg CCXR" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Koenigsegg CCXR</h5>
+        <p><strong>Velocidad:</strong> 530+ km/h (estimada)</p>
+        <p><strong>Motor:</strong> V8 5.0L Twin-Turbo – 1600 HP</p>
+        <p>Diseñado para romper récords de velocidad, el CCXR busca ser el auto más rápido del mundo en carretera.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Koenigsegg CCXR')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Koenigsegg CCXR')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Koenigsegg CCXR','Motor V8 Twin-Turbo, 1600 HP, 0-100 km/h en 2.5s, Precio: $3M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 16 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/regera.jpeg" class="card-img-top" alt="Koenigsegg Regera" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Koenigsegg Regera</h5>
+        <p><strong>Velocidad:</strong> 410 km/h</p>
+        <p><strong>Motor:</strong> V8 5.0L Twin-Turbo Híbrido – 1500 HP</p>
+        <p>El Regera combina potencia bruta con tecnología híbrida avanzada y un sistema de transmisión revolucionario (Direct Drive).</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Koenigsegg Regera')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Koenigsegg Regera')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Koenigsegg Regera','Motor híbrido V8 Twin-Turbo, 1500 HP, 0-100 km/h en 2.8s, Precio: $2.2M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 17 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/gemera.jpeg" class="card-img-top" alt="Koenigsegg Gemera" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Koenigsegg Gemera</h5>
+        <p><strong>Velocidad:</strong> 400 km/h</p>
+        <p><strong>Motor:</strong> 3 cilindros híbrido + eléctricos – 1700 HP</p>
+        <p>El primer megacar de 4 plazas, combina comodidad familiar con un rendimiento brutal, redefiniendo el concepto de hiperdeportivo.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Koenigsegg Gemera')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Koenigsegg Gemera')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Koenigsegg Gemera','Motor híbrido 3 cilindros + eléctricos, 1700 HP, 0-100 km/h en 1.9s, Precio: $1.7M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 18 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/laferrari.jpg" class="card-img-top" alt="Ferrari LaFerrari" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Ferrari LaFerrari</h5>
+        <p><strong>Velocidad:</strong> 350 km/h</p>
+        <p><strong>Motor:</strong> V12 6.3L Híbrido – 963 HP</p>
+        <p>Presentado en 2013, fue el primer Ferrari híbrido, creado como sucesor del Enzo y símbolo de la innovación italiana.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Ferrari LaFerrari')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Ferrari LaFerrari')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Ferrari LaFerrari','Motor V12 híbrido, 963 HP, 0-100 km/h en 2.6s, Precio: $1.5M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 19 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/daytona.jpeg" class="card-img-top" alt="Ferrari Daytona SP3" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Ferrari Daytona SP3</h5>
+        <p><strong>Velocidad:</strong> 340 km/h</p>
+        <p><strong>Motor:</strong> V12 6.5L – 840 HP</p>
+        <p>Inspirado en los prototipos de resistencia de los 60, el SP3 es un homenaje a la victoria de Ferrari en Daytona 1967.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Ferrari Daytona SP3')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Ferrari Daytona SP3')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Ferrari Daytona SP3','Motor V12 6.5L, 840 HP, 0-100 km/h en 2.9s, Precio: $2.2M')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Card 20 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="images/sf90.jpeg" class="card-img-top" alt="Ferrari SF90 Stradale" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">Ferrari SF90 Stradale</h5>
+        <p><strong>Velocidad:</strong> 340 km/h</p>
+        <p><strong>Motor:</strong> V8 Híbrido – 1000 HP</p>
+        <p>Es el primer Ferrari híbrido enchufable de producción, llevando la F1 a las calles con un rendimiento futurista.</p>
+        <div class="d-flex justify-content-between mt-auto">
+          <button class="btn btn-info btn-sm" onclick="mostrarPersonalizacion('Ferrari SF90 Stradale')">Personalizar</button>
+          <button class="btn btn-warning btn-sm" onclick="mostrarCotizacion('Ferrari SF90 Stradale')">Cotizar</button>
+          <button class="btn btn-primary btn-sm" onclick="mostrarInfo('Ferrari SF90 Stradale','Motor V8 híbrido, 1000 HP, 0-100 km/h en 2.5s, Precio: $625K')">Más info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Financing Section -->
+  <div class="financing-section">
+    <h2>Opciones de Financiamiento</h2>
+    <p>Asesor Financiero Especializado te ayudamos a encontrar la mejor opción de financiamiento</p>
+    <div class="btn-group-sm mt-4">
+      <button class="btn-sm btn-yellow"><i class="fas fa-calculator"></i></button>
+      <button class="btn-sm btn-green"><i class="fas fa-calendar-alt"></i></button>
+      <button class="btn-sm btn-cyan"><i class="fas fa-shield-alt"></i></button>
+    </div>
+    <div class="mt-3">
+      <span>Tasas Competitivas</span>
+      <span class="mx-3">Plazos Flexibles</span>
+      <span>Seguros Incluidos</span>
+    </div>
+  </div>
+
+  <!-- Modal Info -->
+  <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Personalización -->
+  <div class="modal fade" id="personalizacionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title">Personalizar Modelo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Color Exterior</label>
+              <select class="form-select">
+                <option>Negro Mate</option>
+                <option>Rojo Metálico</option>
+                <option>Azul Eléctrico</option>
+                <option>Blanco Perlado</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Llantas</label>
+              <select class="form-select">
+                <option>Deportivas 21"</option>
+                <option>Cromadas 22"</option>
+                <option>Fibra de carbono 20"</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Interior</label>
+              <select class="form-select">
+                <option>Cuero Negro</option>
+                <option>Cuero Beige</option>
+                <option>Fibra de carbono + Alcántara</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-success" onclick="cerrarPersonalizacion()">Guardar Opciones</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Cotización -->
+  <div class="modal fade" id="cotizacionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">Solicitar Cotización</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCotizacion">
+            <div class="mb-3">
+              <label for="cotizacionNombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="cotizacionNombre" required />
+            </div>
+            <div class="mb-3">
+              <label for="cotizacionCorreo" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="cotizacionCorreo" required />
+            </div>
+            <div class="mb-3">
+              <label for="cotizacionTelefono" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="cotizacionTelefono" required />
+            </div>
+            <div class="mb-3">
+              <label for="cotizacionMensaje" class="form-label">Mensaje</label>
+              <textarea class="form-control" id="cotizacionMensaje" rows="3" placeholder="Quiero una cotización del modelo con opciones seleccionadas..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Enviar Solicitud</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function mostrarInfo(titulo, descripcion) {
+      document.getElementById("modalTitle").innerText = titulo;
+      document.getElementById("modalBody").innerText = descripcion;
+      new bootstrap.Modal(document.getElementById('infoModal')).show();
+    }
+
+    function mostrarPersonalizacion(modelo) {
+      new bootstrap.Modal(document.getElementById('personalizacionModal')).show();
+    }
+
+    function cerrarPersonalizacion() {
+      new bootstrap.Modal(document.getElementById('personalizacionModal')).hide();
+    }
+
+    function mostrarCotizacion(modelo) {
+      document.getElementById("cotizacionNombre").value = "";
+      document.getElementById("cotizacionCorreo").value = "";
+      document.getElementById("cotizacionTelefono").value = "";
+      document.getElementById("cotizacionMensaje").value = `Quiero una cotización del modelo ${modelo}.`;
+      new bootstrap.Modal(document.getElementById('cotizacionModal')).show();
+    }
+
+    document.getElementById('formCotizacion').addEventListener("submit", e => {
+      e.preventDefault();
+      const nombre = document.getElementById("cotizacionNombre").value.trim();
+      const correo = document.getElementById("cotizacionCorreo").value.trim();
+      const telefono = document.getElementById("cotizacionTelefono").value.trim();
+      const mensaje = document.getElementById("cotizacionMensaje").value.trim();
+
+      if (nombre.length < 3 || !correo || !correo.includes("@") || telefono.length < 7 || mensaje.length < 5) {
+        return;
+      }
+
+      new bootstrap.Modal(document.getElementById('cotizacionModal')).hide();
+      document.getElementById('formCotizacion').reset();
+    });
+  </script>
+
+</body>
+
+</html>
