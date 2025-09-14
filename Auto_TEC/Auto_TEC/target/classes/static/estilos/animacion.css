@@ -1,0 +1,26 @@
+body,html {
+  margin:0; padding:0; height:100%; overflow:hidden;
+  background:#000; display:flex; align-items:center; justify-content:center;
+}
+canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+#ui {
+  position:absolute; z-index:10; inset:0; display:flex; align-items:center; justify-content:center;
+}
+#ignite {
+  padding:16px 40px; border:none; border-radius:50px; cursor:pointer;
+  background:linear-gradient(180deg,#e63946,#b71c1c);
+  color:#fff; font-size:18px; font-weight:700; letter-spacing:1px;
+  box-shadow:0 8px 24px rgba(230,57,70,0.4);
+  transition: transform .2s;
+}
+#ignite:active { transform:scale(.96); }
+#mainContent {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:#000; color:white; font-size:2rem; opacity:0; transition:opacity 1s;
+}
+#mainContent.visible { opacity:1; }
+img#car {
+  position:absolute; inset:0; margin:auto; max-width:70%; max-height:70%;
+  opacity:0; filter:brightness(.4);
+  transition: opacity 1.5s ease, filter 1.5s ease;
+}
