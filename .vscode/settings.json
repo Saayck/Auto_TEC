@@ -1,6 +1,0 @@
-{
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic",
-    "maven.executable.path": "C:\\mycode\\tools\\apache-maven-3.9.11\\bin\\mvn.cmd",
-    "terminal.integrated.defaultProfile.windows": "PowerShell"
-}
