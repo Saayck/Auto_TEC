@@ -2,10 +2,11 @@ package com.organization.Auto_TEC.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class indexController {
-    @Bean({"/", "/index"})
+    @GetMapping({"/", "/index"})
     public String index() {
         return "index";
     }
