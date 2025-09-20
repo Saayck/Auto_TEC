@@ -41,15 +41,13 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="modelos.html">Modelos</a></li>
-          <li class="nav-item"><a class="nav-link" href="ventas.html">Ventas</a></li>
-          <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
-          <li class="nav-item"><a class="nav-link" href="financiamiento.html">Financiamiento</a></li>
-          <li class="nav-item"><a class="nav-link" href="gestion.html">Gestión</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-        </ul>
+        <a class="nav-link" th:href="@{/}">Inicio</a>
+        <a class="nav-link" th:href="@{/modelos}">Modelos</a>
+        <a class="nav-link" th:href="@{/ventas}">Ventas</a>
+        <a class="nav-link" th:href="@{/servicios}">Servicios</a>
+        <a class="nav-link" th:href="@{/financiamiento}">Financiamiento</a>
+        <a class="nav-link" th:href="@{/gestion}">Gestión</a>
+        <a class="nav-link" th:href="@{/contacto}">Contacto</a>
       </div>
     </div>
   </nav>
