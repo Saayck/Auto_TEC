@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelos Exclusivos - AutoTec Motors</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="../../static/css/modelos.css">
+</head>
+<body>
+  <!-- ==============================
+       ✅ Navbar
+       ============================== -->
+    <nav class="navbar navbar-expand-lg">
+      <ul class="navbar-nav ms-auto">
+  <!-- Carrito -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      🛒 Carrito <span id="cartCount" class="badge bg-warning text-dark">0</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown" id="cartList">
+      <li><span class="dropdown-item">Carrito vacío</span></li>
+    </ul>
+  </li>
+
+  <!-- Favoritos -->
+  <li class="nav-item dropdown ms-3">
+    <a class="nav-link dropdown-toggle" href="#" id="favDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      ⭐ Favoritos <span id="favCount" class="badge bg-info text-dark">0</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="favDropdown" id="favList">
+      <li><span class="dropdown-item">Sin favoritos</span></li>
+    </ul>
+  </li>
+</ul>
+
+    <div class="container">
+      <a href="inicio.html" class="navbar-brand fw-bold">
+        <i class="fas fa-car-side"></i> AutoTec Motors
+      </a>
+      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="fas fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="modelos.html" class="nav-link">Modelos</a></li>
+          <li><a href="ventas.html" class="nav-link active">Ventas</a></li>
+          <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+          <li><a href="financiamiento.html" class="nav-link">Financiamiento</a></li>
+          <li><a href="gestion.html" class="nav-link">Gestión</a></li>
+          <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Catálogo -->
+  <div class="container my-5">
+    <h2 class="section-title">Catálogo Hypercars</h2>
+    <div class="row g-4">
+
+      <!-- 1 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/chiron.jpg" class="card-img-top" alt="Bugatti Chiron Super Sport 300+">
+        <div class="card-body text-center">
+          <h5 class="card-title">Bugatti Chiron Super Sport 300+</h5>
+          <p class="card-text">W16 Quad Turbo • 1600 HP • 490 km/h</p>
+          <p class="fw-bold text-warning">$3,900,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Bugatti Chiron Super Sport 300+"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 2 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/jesko.jpg" class="card-img-top" alt="Koenigsegg Jesko Absolut">
+        <div class="card-body text-center">
+          <h5 class="card-title">Koenigsegg Jesko Absolut</h5>
+          <p class="card-text">V8 Twin Turbo • 1600 HP • 530 km/h</p>
+          <p class="fw-bold text-warning">$2,800,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Koenigsegg Jesko Absolut"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 3 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/speedtail.jpeg" class="card-img-top" alt="McLaren Speedtail">
+        <div class="card-body text-center">
+          <h5 class="card-title">McLaren Speedtail</h5>
+          <p class="card-text">Híbrido V8 • 1070 HP • 402 km/h</p>
+          <p class="fw-bold text-warning">$2,250,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="McLaren Speedtail"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 4 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/sf90.jpeg" class="card-img-top" alt="Ferrari SF90 Stradale">
+        <div class="card-body text-center">
+          <h5 class="card-title">Ferrari SF90 Stradale</h5>
+          <p class="card-text">V8 Híbrido • 986 HP • 340 km/h</p>
+          <p class="fw-bold text-warning">$625,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Ferrari SF90 Stradale"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 5 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/sian.jpeg" class="card-img-top" alt="Lamborghini Sián FKP 37">
+        <div class="card-body text-center">
+          <h5 class="card-title">Lamborghini Sián FKP 37</h5>
+          <p class="card-text">V12 Híbrido • 819 HP • 350 km/h</p>
+          <p class="fw-bold text-warning">$3,600,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Lamborghini Sián FKP 37"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 6 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/valkyrie.jpg" class="card-img-top" alt="Aston Martin Valkyrie">
+        <div class="card-body text-center">
+          <h5 class="card-title">Aston Martin Valkyrie</h5>
+          <p class="card-text">V12 Cosworth • 1160 HP • 354 km/h</p>
+          <p class="fw-bold text-warning">$3,200,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Aston Martin Valkyrie"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 7 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/slrstirling.jpg" class="card-img-top" alt="Porsche 918 Spyder">
+        <div class="card-body text-center">
+          <h5 class="card-title">Porsche 918 Spyder</h5>
+          <p class="card-text">V8 Híbrido • 887 HP • 340 km/h</p>
+          <p class="fw-bold text-warning">$850,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Porsche 918 Spyder"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 8 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/amg-one.jpg" class="card-img-top" alt="Mercedes-AMG One">
+        <div class="card-body text-center">
+          <h5 class="card-title">Mercedes-AMG One</h5>
+          <p class="card-text">V6 Híbrido F1 • 1063 HP • 352 km/h</p>
+          <p class="fw-bold text-warning">$2,700,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Mercedes-AMG One"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 9 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/nevera.jpg" class="card-img-top" alt="Rimac Nevera">
+        <div class="card-body text-center">
+          <h5 class="card-title">Rimac Nevera</h5>
+          <p class="card-text">100% Eléctrico • 1914 HP • 412 km/h</p>
+          <p class="fw-bold text-warning">$2,400,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Rimac Nevera"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 10 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/huayra.jpeg" class="card-img-top" alt="Pagani Huayra Roadster BC">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pagani Huayra Roadster BC</h5>
+          <p class="card-text">V12 AMG • 800 HP • 370 km/h</p>
+          <p class="fw-bold text-warning">$3,500,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Pagani Huayra Roadster BC"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 11 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/evija.jpeg" class="card-img-top" alt="Lotus Evija">
+        <div class="card-body text-center">
+          <h5 class="card-title">Lotus Evija</h5>
+          <p class="card-text">100% Eléctrico • 2000 HP • 320 km/h</p>
+          <p class="fw-bold text-warning">$2,100,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Lotus Evija"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 12 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/devel sisteen.jfif" class="card-img-top" alt="Devel Sixteen">
+        <div class="card-body text-center">
+          <h5 class="card-title">Devel Sixteen</h5>
+          <p class="card-text">V16 Quad Turbo • 5007 HP • 560 km/h</p>
+          <p class="fw-bold text-warning">$5,000,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Devel Sixteen"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 13 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/Pirinfanina battista.jfif" class="card-img-top" alt="Pininfarina Battista">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pininfarina Battista</h5>
+          <p class="card-text">100% Eléctrico • 1900 HP • 350 km/h</p>
+          <p class="fw-bold text-warning">$2,500,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Pininfarina Battista"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 14 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/Czinger 21c.jfif" class="card-img-top" alt="Czinger 21C">
+        <div class="card-body text-center">
+          <h5 class="card-title">Czinger 21C</h5>
+          <p class="card-text">Híbrido V8 • 1250 HP • 432 km/h</p>
+          <p class="fw-bold text-warning">$1,700,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Czinger 21C"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 15 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/apollo intensa emozione.jfif" class="card-img-top" alt="Apollo Intensa Emozione">
+        <div class="card-body text-center">
+          <h5 class="card-title">Apollo Intensa Emozione</h5>
+          <p class="card-text">V12 • 780 HP • 335 km/h</p>
+          <p class="fw-bold text-warning">$2,700,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Apollo Intensa Emozione"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 16 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/henessey venom f5.jfif" class="card-img-top" alt="Hennessey Venom F5">
+        <div class="card-body text-center">
+          <h5 class="card-title">Hennessey Venom F5</h5>
+          <p class="card-text">V8 Twin Turbo • 1817 HP • 500 km/h</p>
+          <p class="fw-bold text-warning">$2,100,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Hennessey Venom F5"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 17 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/ssc tuatara.jfif" class="card-img-top" alt="SSC Tuatara">
+        <div class="card-body text-center">
+          <h5 class="card-title">SSC Tuatara</h5>
+          <p class="card-text">V8 Twin Turbo • 1750 HP • 455 km/h</p>
+          <p class="fw-bold text-warning">$1,900,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="SSC Tuatara"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 18 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/zenvo tsr-s.jfif" class="card-img-top" alt="Zenvo TSR-S">
+        <div class="card-body text-center">
+          <h5 class="card-title">Zenvo TSR-S</h5>
+          <p class="card-text">V8 Supercargado • 1177 HP • 325 km/h</p>
+          <p class="fw-bold text-warning">$1,600,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Zenvo TSR-S"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 19 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/gordon murray t.50.jfif" class="card-img-top" alt="Gordon Murray T.50">
+        <div class="card-body text-center">
+          <h5 class="card-title">Gordon Murray T.50</h5>
+          <p class="card-text">V12 • 654 HP • 355 km/h</p>
+          <p class="fw-bold text-warning">$3,000,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Gordon Murray T.50"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 20 -->
+      <div class="col-md-3 col-sm-6"><div class="card h-100">
+        <img src="../../static/images/maserati mc20.jfif  " class="card-img-top" alt="Maserati MC20">
+        <div class="card-body text-center">
+          <h5 class="card-title">Maserati MC20</h5>
+          <p class="card-text">V6 Nettuno • 621 HP • 325 km/h</p>
+          <p class="fw-bold text-warning">$250,000</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn-sm btn-yellow btn-favorite"><i class="fa fa-star"></i></button>
+            <button class="btn-sm btn-green btn-buy" data-bs-toggle="modal" data-bs-target="#buyModal" data-model="Maserati MC20"><i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title">Comprar vehículo</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Deseas iniciar el proceso de compra del <span id="carModel"></span>?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+<button class="btn btn-success" id="confirmBuy">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../static/javascript/modelos.js"></script>
+</body>
+</html>
