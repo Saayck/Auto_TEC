@@ -1,5 +1,4 @@
-
-    /* ------------------- ESTILOS GENERALES ------------------- */
+/* ------------------- ESTILOS GENERALES ------------------- */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -7,9 +6,9 @@
       color: #fff;
     }
 
-    /* ------------------- NAVBAR ------------------- */
+    /* ------------------- MENÚ ------------------- */
     nav {
-      background: linear-gradient(90deg, #0d0d0d, #1a1a1a);
+      background: #000;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -36,7 +35,6 @@
       gap: 25px;
       margin: 0;
       padding: 0;
-      flex-wrap: wrap;
     }
 
     nav ul li a {
@@ -68,55 +66,12 @@
       width: 100%;
     }
 
-    /* link activo */
-    nav ul li a.active {
-      color: #a855f7;
-      text-shadow: 0 0 12px #a855f7, 0 0 20px #f59e0b;
-    }
-    nav ul li a.active::after {
-      width: 100%;
-    }
-
     /* ------------------- TITULOS ------------------- */
     h1, h2 {
       text-align: center;
       color: #f59e0b;
       text-shadow: 0 0 15px #f59e0b, 0 0 25px #a855f7;
       margin-top: 40px;
-    }
-
-    /* ------------------- FEATURES ------------------- */
-    .features {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 60px auto;
-      flex-wrap: wrap;
-      max-width: 1000px;
-    }
-
-    .feature-card {
-      background: #111;
-      border-radius: 12px;
-      padding: 30px;
-      flex: 1 1 250px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px #f59e0b, 0 0 35px #a855f7;
-    }
-
-    .feature-card h3 {
-      margin-top: 15px;
-      color: #fbbf24;
-    }
-
-    .feature-card p {
-      color: #ccc;
     }
 
     /* ------------------- FORMULARIO ------------------- */
@@ -131,8 +86,7 @@
     }
 
     form:hover {
-      box-shadow: 0 0 30px rgba(245, 158, 11, 0.9),
-                  0 0 40px rgba(168, 85, 247, 0.7);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.9), 0 0 40px rgba(168, 85, 247, 0.7);
     }
 
     label {
@@ -179,6 +133,40 @@
       box-shadow: 0 0 20px #f59e0b, 0 0 30px #a855f7;
     }
 
+    /* ------------------- SECCIONES ------------------- */
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 60px auto;
+      flex-wrap: wrap;
+      max-width: 1000px;
+    }
+
+    .feature-card {
+      background: #111;
+      border-radius: 12px;
+      padding: 30px;
+      flex: 1 1 250px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px #f59e0b, 0 0 35px #a855f7;
+    }
+
+    .feature-card h3 {
+      margin-top: 15px;
+      color: #fbbf24;
+    }
+
+    .feature-card p {
+      color: #ccc;
+    }
+
     /* ------------------- FOOTER ------------------- */
     footer {
       text-align: center;
@@ -187,17 +175,4 @@
       color: #aaa;
       margin-top: 40px;
       border-top: 2px solid #a855f7;
-    }
-
-    /* ------------------- RESPONSIVE ------------------- */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        padding: 15px 20px;
-      }
-      nav ul {
-        justify-content: center;
-        gap: 15px;
-        margin-top: 10px;
-      }
     }
