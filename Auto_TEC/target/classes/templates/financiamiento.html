@@ -3,23 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoTec Motors - Contacto Premium</title>
+  <title>AutoTec Motors - Financiamiento Premium</title>
+
   <!-- Vincular CSS externo -->
-  <link rel="stylesheet" href="/css/contacto.css">
+  <link rel="stylesheet" href="/css/financiamiento.css">
 </head>
 <body>
   <div class="container">
-      <a href="index.html" class="navbar-brand fw-bold">
+      <a href="/index" class="navbar-brand fw-bold">
         <i class="fas fa-car-side"></i> AutoTec Motors
       </a>
       <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="fas fa-bars"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li><a href="/index" class="nav-link">Inicio</a></li>
+          <li><a href="/modelos" class="nav-link">Modelos</a></li>
+          <li><a href="/ventas" class="nav-link active">Ventas</a></li>
+          <li><a href="/servicios" class="nav-link">Servicios</a></li>
+          <li><a href="/financiamiento" class="nav-link">Financiamiento</a></li>
+          <li><a href="/gestion" class="nav-link">Gestión</a></li>
+          <li><a href="/contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <!-- Sección de Título -->
-  <h1>Opciones de Contacto Premium</h1>
+  <h1>Opciones de Financiamiento Premium</h1>
 
   <!-- Features -->
   <div class="features">
@@ -39,7 +51,7 @@
 
   <!-- Formulario -->
   <h2>Solicita tu Plan</h2>
-  <form>
+  <form id="financiamientoForm">
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre" placeholder="Ingresa tu nombre">
 
@@ -65,5 +77,6 @@
     © 2025 AutoTec Motors - Todos los derechos reservados
   </footer>
 
+  
 </body>
 </html>

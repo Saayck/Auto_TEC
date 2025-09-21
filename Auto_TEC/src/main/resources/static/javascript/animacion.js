@@ -147,7 +147,7 @@ ignite.addEventListener("click", () => {
   }, 4500);
 
   setTimeout(() => {
-     window.location.href = "index.html";
+     window.location.href = "/index";
     console.log("Redirección a página principal");
   }, 6500);
 });
