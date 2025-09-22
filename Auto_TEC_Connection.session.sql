@@ -34,3 +34,4 @@ CREATE TABLE citas (
     fecha TIMESTAMP NOT NULL,
     estado VARCHAR(20) DEFAULT 'pendiente'
 );
+--Diagrama de la base de datos
