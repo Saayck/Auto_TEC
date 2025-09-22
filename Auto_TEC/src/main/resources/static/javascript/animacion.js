@@ -1,4 +1,3 @@
-// Configuración del canvas y contexto
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 let W = canvas.width = window.innerWidth;
@@ -101,35 +100,43 @@ function animate() {
 
 animate();
 
-// Secuencia al presionar Ignition
+// ====== ELEMENTOS UI ======
 const ignite = document.getElementById("ignite");
 const ui = document.getElementById("ui");
 const carContainer = document.getElementById("car-container");
 const mirrorEffect = document.querySelector(".mirror-effect");
-const mainContent = document.getElementById("mainContent");
+const mainContent = document.getElementById("mainContent"); // puede no existir en tu HTML
 const roadLine = document.querySelector(".road-line");
 
-ignite.addEventListener("click", () => {
-  ui.style.opacity = "0";
-  setTimeout(() => ui.style.display = "none", 800);
+// ====== SECUENCIA (ahora en función reutilizable) ======
+function startSequence() {
+  // Oculta UI
+  if (ui) {
+    ui.style.opacity = "0";
+    setTimeout(() => ui.style.display = "none", 800);
+  }
 
+  // Explosión inicial de partículas
   for (let i = 0; i < 300; i++) {
     particles.push(new Particle(W / 2, H / 2));
   }
 
+  // Anima la carretera
   let roadOffset = 0;
   const roadAnimation = setInterval(() => {
     roadOffset += 10;
-    roadLine.style.backgroundPositionX = -roadOffset + "px";
+    if (roadLine) roadLine.style.backgroundPositionX = -roadOffset + "px";
   }, 50);
 
+  // Muestra el coche y espejo
   setTimeout(() => {
-    carContainer.style.opacity = "1";
+    if (carContainer) carContainer.style.opacity = "1";
     setTimeout(() => {
-      mirrorEffect.style.opacity = "0.7";
+      if (mirrorEffect) mirrorEffect.style.opacity = "0.7";
     }, 500);
   }, 1000);
 
+  // Partículas circulares
   setTimeout(() => {
     for (let i = 0; i < 500; i++) {
       const angle = Math.random() * Math.PI * 2;
@@ -140,17 +147,31 @@ ignite.addEventListener("click", () => {
     }
   }, 2500);
 
+  // Fade-out y muestra contenido (si existe)
   setTimeout(() => {
-    carContainer.style.opacity = "0";
-    mirrorEffect.style.opacity = "0";
-    mainContent.classList.add("visible");
+    if (carContainer) carContainer.style.opacity = "0";
+    if (mirrorEffect) mirrorEffect.style.opacity = "0";
+    if (mainContent) mainContent.classList.add("visible");
   }, 4500);
 
+  // Redirección final a /index
   setTimeout(() => {
-     window.location.href = "/index";
+    clearInterval(roadAnimation);
+    window.location.href = "/index"; // <-- AQUÍ se dirige automáticamente al index
     console.log("Redirección a página principal");
   }, 6500);
+}
+
+// ====== AUTOINICIO AL CARGAR LA PÁGINA ======
+document.addEventListener("DOMContentLoaded", () => {
+  // Inicia solo o también puedes retrasarlo unos ms si quieres
+  startSequence();
 });
+
+// ====== (Opcional) Mantener el botón funcionando ======
+if (ignite) {
+  ignite.addEventListener("click", startSequence);
+}
 
 // Centelleos aleatorios
 function createSparkles() {
@@ -172,4 +193,3 @@ function createSparkles() {
 }
 
 setInterval(createSparkles, 300);
-

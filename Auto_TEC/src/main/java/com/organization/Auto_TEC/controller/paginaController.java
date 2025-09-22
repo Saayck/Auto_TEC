@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class paginaController {
 
-    @GetMapping({"/","/index"})
+    @GetMapping({"/","/animacion"})
     public String index() {
-        return "index";
+        return "animacion";
+    }
+    @GetMapping("/index")
+    public String inicio() {
+        return "/index";
     }
     @GetMapping("/modelos")
     public String modelos() {
