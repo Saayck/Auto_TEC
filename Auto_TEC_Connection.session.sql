@@ -201,3 +201,4 @@ CREATE TABLE sesiones (
 
 -- para eliminar drop table "nombre de la tablas"
 -- para renombrar tablas "ALTER TABLE tabla-nueva RENAME TO tabla-vieja;";
+
