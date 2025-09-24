@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="../../static/css/dashboard.css" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Admin Panel</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="../Admin/dashboard.html">Dashboard</a></li>
+        <li><a href="../Admin/gestion_clientes.html">Usuarios</a></li>
+        <li><a href="../Admin/gestion_empleados.html">Empleados</a></li>
+        <li><a href="../Admin/reportes.html">Reportes</a></li>
+        <li><a href="/logout">Cerrar sesión</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="main-header">
+      <h1>Bienvenido, Administrador</h1>
+      <div class="actions">
+        <button class="btn btn-warning btn-login">Añadir nuevo</button>
+        <button class="btn btn-cyan btn-login">Configuraciones</button>
+      </div>
+    </header>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+      <div class="card visible">
+        <img src="https://via.placeholder.com/400x240" alt="Imagen 1" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">Resumen General</h5>
+          <p class="card-text">Información breve sobre el estado actual del sistema.</p>
+          <button class="btn-details">Ver detalles</button>
+        </div>
+      </div>
+
+      <div class="card visible">
+        <img src="https://via.placeholder.com/400x240" alt="Imagen 2" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">Actividad Reciente</h5>
+          <p class="card-text">Últimas acciones realizadas por los usuarios.</p>
+          <button class="btn-details">Ver detalles</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="table-section">
+      <h2>Últimos Usuarios</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Fecha de Registro</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Juan Pérez</td>
+            <td>juan@email.com</td>
+            <td>2025-09-24</td>
+            <td><button class="btn btn-cyan">Ver</button></td>
+          </tr>
+          <tr>
+            <td>Ana López</td>
+            <td>ana@email.com</td>
+            <td>2025-09-23</td>
+            <td><button class="btn btn-cyan">Ver</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+
+</html>

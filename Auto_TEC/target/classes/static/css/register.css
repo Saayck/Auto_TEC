@@ -1,0 +1,127 @@
+/* register.css */
+
+:root {
+  --clr-bg: #0a0a0a;
+  --clr-card: #1a1a1a;
+  --clr-text: #f5f5f5;
+  --clr-gold: #d4af37;
+  --clr-purple: #a855f7;
+  --clr-purple-light: #c084fc;
+  --transition-time: 0.4s;
+}
+
+body.register-body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-container {
+  background-color: var(--clr-card);
+  padding: 3rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px var(--clr-purple);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.auth-title {
+  color: var(--clr-gold);
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 12px var(--clr-purple);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form input {
+  background-color: #121212;
+  border: 2px solid var(--clr-purple);
+  border-radius: 0.8rem;
+  padding: 12px 15px;
+  font-size: 1rem;
+  color: var(--clr-text);
+  transition: border-color var(--transition-time) ease, box-shadow var(--transition-time) ease;
+  outline: none;
+}
+
+.auth-form input::placeholder {
+  color: var(--clr-text);
+  opacity: 0.6;
+}
+
+.auth-form input:focus {
+  border-color: var(--clr-purple);
+  box-shadow: 0 0 12px var(--clr-purple);
+}
+
+.auth-switch {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--clr-text);
+}
+
+.auth-switch a {
+  color: var(--clr-gold);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color var(--transition-time) ease;
+}
+
+.auth-switch a:hover {
+  color: var(--clr-purple);
+}
+
+.btn-register {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--clr-purple);
+  border: none;
+  padding: 14px 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--clr-text);
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--clr-purple);
+  transition: background-color var(--transition-time) ease, box-shadow var(--transition-time) ease, transform 0.15s ease;
+}
+
+.btn-register:hover {
+  background-color: var(--clr-purple-light);
+  box-shadow: 0 0 25px var(--clr-purple-light);
+  transform: scale(1.05);
+}
+
+.btn-register:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: rgba(168, 85, 247, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+  transition: opacity 0.3s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.btn-register:active:after {
+  opacity: 1;
+  transform: scale(1);
+  transition: 0s;
+}
