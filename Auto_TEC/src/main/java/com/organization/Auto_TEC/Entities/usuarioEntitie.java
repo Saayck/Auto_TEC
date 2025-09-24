@@ -14,7 +14,7 @@ public class usuarioEntitie { // Usa PascalCase para la clase
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
-    private Rol rol = Rol.CLIENTE; // <--- enum
+    private Rol rol = Rol.CLIENTE; 
 
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
@@ -32,7 +32,7 @@ public class usuarioEntitie { // Usa PascalCase para la clase
     private String apellidos;
 
     @Column(name = "activo", nullable = false)
-    private boolean activo = true; // evita null + aprovecha default en Java
+    private boolean activo = true;
 
     @CreationTimestamp
     @Column(name = "fecha_registro", updatable = false)
