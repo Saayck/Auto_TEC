@@ -1,37 +1,212 @@
 -- Crea la base de datos Auto_TEC
 -- Tabla de usuarios
-CREATE TABLE usuarios (
+
+-- Tabla de modelos de vehículos
+CREATE TABLE modelos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) UNIQUE NOT NULL,
-    contrasena VARCHAR(255) NOT NULL,
+    marca VARCHAR(50) NOT NULL,
+    descripcion TEXT,
+    motor VARCHAR(100),
+    potencia VARCHAR(50),
+    velocidad_max VARCHAR(50),
+    aceleracion VARCHAR(50),
+    precio DECIMAL(12,2) NOT NULL,
+    imagen_url VARCHAR(255),
+    destacado BOOLEAN DEFAULT FALSE,
+    stock INTEGER DEFAULT 1,
+    categoria VARCHAR(20) DEFAULT 'hypercar',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de clientes
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefono VARCHAR(20),
+    direccion TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de vehículos
-CREATE TABLE  or replace vehiculos (
+-- Tabla de cotizaciones/solicitudes de información
+CREATE TABLE cotizaciones (
     id SERIAL PRIMARY KEY,
-    usuario_id INTEGER REFERENCES usuarios(id),
-    marca VARCHAR(50),
-    modelo VARCHAR(50),
-    anio INTEGER,
-    placa VARCHAR(20) UNIQUE
+    cliente_id INTEGER REFERENCES clientes(id),
+    modelo_id INTEGER REFERENCES modelos(id),
+    nombre_solicitante VARCHAR(100) NOT NULL,
+    email_solicitante VARCHAR(100) NOT NULL,
+    modelo_interes VARCHAR(100) NOT NULL,
+    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'contactado', 'completado')),
+    notas TEXT
 );
 
--- Tabla de servicios
+-- Tabla de ventas
+CREATE TABLE ventas (
+    id SERIAL PRIMARY KEY,
+    cliente_id INTEGER REFERENCES clientes(id),
+    modelo_id INTEGER REFERENCES modelos(id),
+    fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    precio_venta DECIMAL(12,2) NOT NULL,
+    estado VARCHAR(20) DEFAULT 'reservado' CHECK (estado IN ('reservado', 'confirmado', 'entregado')),
+    metodo_pago VARCHAR(50),
+    vendedor VARCHAR(100)
+);
+
+-- Tabla de carrito de compras (sesiones temporales)
+CREATE TABLE carrito (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(100) NOT NULL,
+    modelo_id INTEGER REFERENCES modelos(id),
+    cantidad INTEGER DEFAULT 1,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de favoritos
+CREATE TABLE favoritos (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(100) NOT NULL,
+    modelo_id INTEGER REFERENCES modelos(id),
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(session_id, modelo_id)
+);
+
+-- Tabla de servicios de la empresa
 CREATE TABLE servicios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT
+    descripcion TEXT,
+    icono VARCHAR(50),
+    categoria VARCHAR(50) CHECK (categoria IN ('financiamiento', 'mantenimiento', 'garantia', 'personalizacion', 'seguro', 'entrega')),
+    precio DECIMAL(10,2),
+    duracion_estimada VARCHAR(50),
+    disponible BOOLEAN DEFAULT TRUE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de citas de servicio
+-- Tabla de opciones de financiamiento
+CREATE TABLE financiamiento (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    tasa_interes DECIMAL(5,2) NOT NULL,
+    plazo_min INTEGER NOT NULL,
+    plazo_max INTEGER NOT NULL,
+    enganche_minimo DECIMAL(5,2) NOT NULL, -- Porcentaje
+    requisitos TEXT,
+    activo BOOLEAN DEFAULT TRUE
+);
+
+-- Tabla de empleados/departamentos
+CREATE TABLE empleados (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    puesto VARCHAR(100) NOT NULL,
+    departamento VARCHAR(50) CHECK (departamento IN ('gerencia', 'ventas', 'marketing', 'administracion', 'servicio_cliente')),
+    email VARCHAR(100),
+    telefono VARCHAR(20),
+    extension VARCHAR(10),
+    activo BOOLEAN DEFAULT TRUE,
+    fecha_contratacion DATE
+);
+
+-- Tabla de citas agendadas
 CREATE TABLE citas (
     id SERIAL PRIMARY KEY,
-    usuario_id INTEGER REFERENCES usuarios(id),
-    vehiculo_id INTEGER REFERENCES vehiculos(id),
-    servicio_id INTEGER REFERENCES servicios(id),
-    fecha TIMESTAMP NOT NULL,
-    estado VARCHAR(20) DEFAULT 'pendiente'
+    cliente_id INTEGER REFERENCES clientes(id),
+    empleado_id INTEGER REFERENCES empleados(id),
+    tipo_cita VARCHAR(50) CHECK (tipo_cita IN ('venta', 'servicio', 'financiamiento', 'general', 'prueba_manejo')),
+    fecha_cita TIMESTAMP NOT NULL,
+    duracion_estimada INTEGER DEFAULT 60,
+    estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'confirmada', 'completada', 'cancelada')),
+    notas TEXT,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
---Diagrama de la base de datos
+
+-- Tabla de cálculos de financiamiento
+CREATE TABLE calculos_financiamiento (
+    id SERIAL PRIMARY KEY,
+    cliente_id INTEGER REFERENCES clientes(id),
+    modelo_vehiculo VARCHAR(100) NOT NULL,
+    precio_vehiculo DECIMAL(12,2) NOT NULL,
+    cuota_inicial DECIMAL(12,2) NOT NULL,
+    plazo_meses INTEGER NOT NULL,
+    tasa_interes DECIMAL(5,2) NOT NULL,
+    cuota_mensual DECIMAL(10,2) NOT NULL,
+    total_financiado DECIMAL(12,2) NOT NULL,
+    fecha_calculo TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de contactos de gestión
+CREATE TABLE contactos_gestion (
+    id SERIAL PRIMARY KEY,
+    nombre_solicitante VARCHAR(100) NOT NULL,
+    email_solicitante VARCHAR(100) NOT NULL,
+    departamento VARCHAR(50) CHECK (departamento IN ('gerencia', 'marketing', 'administracion', 'ventas', 'servicios')),
+    asunto VARCHAR(200) NOT NULL,
+    mensaje TEXT,
+    fecha_contacto TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'respondido', 'completado'))
+);
+
+-- Tabla de solicitudes de financiamiento
+CREATE TABLE solicitudes_financiamiento (
+    id SERIAL PRIMARY KEY,
+    cliente_id INTEGER REFERENCES clientes(id),
+    nombre_solicitante VARCHAR(100) NOT NULL,
+    email_solicitante VARCHAR(100) NOT NULL,
+    modelo_interes VARCHAR(100) NOT NULL,
+    mensaje TEXT,
+    plan_financiamiento VARCHAR(100),
+    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'evaluando', 'aprobado', 'rechazado'))
+);
+
+-- Tabla de contactos generales
+CREATE TABLE contactos_general (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20),
+    asunto VARCHAR(200) NOT NULL,
+    mensaje TEXT NOT NULL,
+    tipo_consulta VARCHAR(50) CHECK (tipo_consulta IN ('venta', 'servicio', 'financiamiento', 'general', 'soporte')),
+    fecha_contacto TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(20) DEFAULT 'nuevo' CHECK (estado IN ('nuevo', 'en_proceso', 'respondido', 'cerrado'))
+);
+
+-- Tabla de usuarios del sistema (para login)
+CREATE TABLE roles (
+  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  nombre VARCHAR(20) UNIQUE NOT NULL
+  CHECK (nombre IN ('CLIENTE','VENDEDOR','ADMIN','GERENTE'))
+);
+
+CREATE TABLE usuarios (
+  id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  roles_id INTEGER REFERENCES roles(id),
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email    VARCHAR(100) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  nombres VARCHAR(100) NOT NULL,
+  apellidos VARCHAR(100) NOT NULL,
+  activo BOOLEAN NOT NULL DEFAULT TRUE,
+  fecha_registro TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+  ultimo_login   TIMESTAMPTZ
+);
+
+
+-- Tabla de sesiones de usuario
+CREATE TABLE sesiones (
+    id SERIAL PRIMARY KEY,
+    usuario_id INTEGER REFERENCES usuarios(id),
+    session_token VARCHAR(255) UNIQUE NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_expiracion TIMESTAMP NOT NULL,
+    activa BOOLEAN DEFAULT TRUE
+);
+
+-- para eliminar drop table "nombre de la tablas"
+-- para renombrar tablas "ALTER TABLE tabla-nueva RENAME TO tabla-vieja;";
+

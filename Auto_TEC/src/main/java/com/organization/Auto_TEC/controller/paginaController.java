@@ -1,11 +1,10 @@
-package com.organization.Auto_TEC.controller;
+package com.organization.Auto_TEC.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class paginaController {
-
     @GetMapping({"/","/animacion"})
     public String index() {
         return "animacion";
