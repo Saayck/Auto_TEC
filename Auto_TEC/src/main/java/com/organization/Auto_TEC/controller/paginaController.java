@@ -1,4 +1,4 @@
-package com.organization.Auto_TEC.Controller;
+package com.organization.Auto_TEC.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
