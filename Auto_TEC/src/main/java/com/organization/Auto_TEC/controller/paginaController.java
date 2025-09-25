@@ -37,4 +37,9 @@ public class paginaController {
     public String contacto() {
         return "contacto";
     }
+    @GetMapping("/dashboard")
+        public String dashboard(){
+        return "Admin/dashboard";
+      }
+    
 }
