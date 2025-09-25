@@ -1,0 +1,25 @@
+<!-- archivo: fragments.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+    <link rel="stylesheet" href="/css/registro.css">
+</head>
+<body>
+   <div th:fragment="registroForm">
+    <div class="form-container">
+        <h1>Registro</h1>
+        <form th:action="@{/registro}" method="post" th:object="${user}">
+            <input type="text" th:field="*{username}" placeholder="Usuario" required>
+            <input type="email" th:field="*{email}" placeholder="Correo" required>
+            <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+            <button class="btn-register" type="submit">Registrar</button>
+        </form>
+        <p>¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión</a></p>
+    </div>
+</div>
+
+
+</body>
+</html>

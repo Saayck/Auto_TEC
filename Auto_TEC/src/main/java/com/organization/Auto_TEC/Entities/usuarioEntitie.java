@@ -6,15 +6,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
-public class usuarioEntitie { // Usa PascalCase para la clase
-
+public class usuarioEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "rol", nullable = false, length = 20)
-    private Rol rol = Rol.CLIENTE; 
+    @Column(name = "roles_id", nullable = false)
+    private Rol rol = Rol.USUARIO; 
 
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
@@ -40,4 +39,35 @@ public class usuarioEntitie { // Usa PascalCase para la clase
 
     @Column(name = "ultimo_login")
     private OffsetDateTime ultimoLogin;
+    protected usuarioEntitie() {}
+    public usuarioEntitie(Rol rol, String username, String email, String passwordHash, String nombres, String apellidos) {
+    this.rol = rol;
+    this.username = username;
+    this.email = email;
+    this.passwordHash = passwordHash;
+    this.nombres = nombres;
+    this.apellidos = apellidos;
+    this.activo = true;
+}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Rol getRol() { return rol; }
+    public void setRol(Rol rol) { this.rol = rol; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public String getNombres() { return nombres; }
+    public void setNombres(String nombres) { this.nombres = nombres; }
+    public String getApellidos() { return apellidos; }
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
+    public OffsetDateTime getFechaRegistro() { return fechaRegistro; }
+    public void setFechaRegistro(OffsetDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public OffsetDateTime getUltimoLogin() { return ultimoLogin; }
+    public void setUltimoLogin(OffsetDateTime ultimoLogin) { this.ultimoLogin = ultimoLogin; }
 }
