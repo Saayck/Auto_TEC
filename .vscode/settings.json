@@ -20,5 +20,6 @@
             "username": "postgres",
             "connectionTimeout": 30000
         }
-    ]
+    ],
+    "livePreview.defaultPreviewPath": "/Auto_TEC/src/main/resources/templates/page/login.html"
 }
