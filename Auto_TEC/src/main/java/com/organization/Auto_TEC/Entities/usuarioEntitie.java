@@ -39,35 +39,107 @@ public class usuarioEntitie {
 
     @Column(name = "ultimo_login")
     private OffsetDateTime ultimoLogin;
-    protected usuarioEntitie() {}
-    public usuarioEntitie(Rol rol, String username, String email, String passwordHash, String nombres, String apellidos) {
-    this.rol = rol;
-    this.username = username;
-    this.email = email;
-    this.passwordHash = passwordHash;
-    this.nombres = nombres;
-    this.apellidos = apellidos;
-    this.activo = true;
-}
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public Rol getRol() { return rol; }
-    public void setRol(Rol rol) { this.rol = rol; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getNombres() { return nombres; }
-    public void setNombres(String nombres) { this.nombres = nombres; }
-    public String getApellidos() { return apellidos; }
-    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
-    public Boolean getActivo() { return activo; }
-    public void setActivo(Boolean activo) { this.activo = activo; }
-    public OffsetDateTime getFechaRegistro() { return fechaRegistro; }
-    public void setFechaRegistro(OffsetDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
-    public OffsetDateTime getUltimoLogin() { return ultimoLogin; }
-    public void setUltimoLogin(OffsetDateTime ultimoLogin) { this.ultimoLogin = ultimoLogin; }
+    public usuarioEntitie() {}
+    public usuarioEntitie(Long id,
+                          Rol rol,
+                          String username,
+                          String passwordHash,
+                          String email,
+                          String nombres,
+                          String apellidos,
+                          boolean activo,
+                          OffsetDateTime ultimoLogin) {
+        this.id = id;
+        this.rol = (rol != null) ? rol : Rol.USUARIO;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.email = email;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.activo = activo;
+        this.ultimoLogin = ultimoLogin;
+    }
+
+    // ===== Getters y Setters =====
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public OffsetDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(OffsetDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public OffsetDateTime getUltimoLogin() {
+        return ultimoLogin;
+    }
+
+    public void setUltimoLogin(OffsetDateTime ultimoLogin) {
+        this.ultimoLogin = ultimoLogin;
+    }
 }
