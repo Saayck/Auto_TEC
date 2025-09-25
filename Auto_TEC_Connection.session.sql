@@ -1,7 +1,7 @@
 -- Tabla de roles de usuario
 CREATE TABLE roles (
   id SERIAL PRIMARY KEY,
-  nombre VARCHAR(20) UNIQUE NOT NULL CHECK (nombre IN ('CLIENTE', 'VENDEDOR', 'ADMIN', 'GERENTE'))
+  nombre VARCHAR(20) UNIQUE NOT NULL CHECK (nombre IN ('USUARIO', 'VENDEDOR', 'ADMIN', 'GERENTE'))
 );
 
 -- Tabla de usuarios
@@ -16,15 +16,6 @@ CREATE TABLE usuarios (
   activo BOOLEAN NOT NULL DEFAULT TRUE,
   fecha_registro TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   ultimo_login TIMESTAMPTZ
-);
-
--- Tabla de administradores (esta es la nueva tabla muchacho para administradores)
-CREATE TABLE administradores (
-  id BIGSERIAL PRIMARY KEY,
-  usuario_id BIGINT REFERENCES usuarios(id) UNIQUE NOT NULL,
-  departamento VARCHAR(50),
-  fecha_creacion TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-  activo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabla de logs administrativos (NUEVA TABLA)
@@ -55,12 +46,10 @@ CREATE TABLE sesiones (
 CREATE TABLE clientes (
   id BIGSERIAL PRIMARY KEY,
   usuario_id BIGINT REFERENCES usuarios(id) UNIQUE,
-  nombre VARCHAR(100) NOT NULL,
-  email VARCHAR(100) UNIQUE NOT NULL,
   telefono VARCHAR(20),
   direccion TEXT,
   tipo_documento VARCHAR(20) DEFAULT 'DNI',
-  numero_documento VARCHAR(20),
+  numero_documento VARCHAR(8) UNIQUE,
   fecha_nacimiento DATE,
   fecha_registro TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
@@ -188,7 +177,7 @@ CREATE TABLE citas (
   fecha_cita TIMESTAMP NOT NULL,
   duracion_estimada INTEGER DEFAULT 60,
   estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'confirmada', 'completada', 'cancelada')),
-  notas TEXT,
+    notas TEXT,
   fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

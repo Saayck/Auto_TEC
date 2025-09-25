@@ -6,15 +6,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
-public class usuarioEntitie { // Usa PascalCase para la clase
-
+public class usuarioEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "rol", nullable = false, length = 20)
-    private Rol rol = Rol.CLIENTE; 
+    @Column(name = "roles_id", nullable = false)
+    private Rol rol = Rol.USUARIO; 
 
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
