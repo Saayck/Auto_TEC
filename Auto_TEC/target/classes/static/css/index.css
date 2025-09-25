@@ -257,8 +257,8 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease,
                 background-color var(--transition-time) ease, color var(--transition-time) ease,
                 opacity 0.6s ease;
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             will-change: transform, opacity;
             position: relative;
             overflow: hidden;
@@ -287,7 +287,7 @@
         }
 
         .card:hover::before {
-            opacity: 0.7;
+            opacity: 1;
             bottom: 0;
         }
 
@@ -373,7 +373,7 @@
             padding: 1rem 1.5rem;
             border-radius: 1rem;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            opacity: 0;
+            opacity: 1;
             pointer-events: none;
             transition: opacity 0.35s ease;
             font-weight: 700;
