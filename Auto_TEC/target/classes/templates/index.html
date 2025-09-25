@@ -29,30 +29,8 @@
     <span id="toast-mensaje"></span>
   </div>
 
-  <!-- Contenido Principal -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="/index">
-        <i class="fas fa-car-side me-2"></i>AutoTec Motors
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link active" href="/index">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="/modelos">Modelos</a></li>
-          <li class="nav-item"><a class="nav-link" href="/ventas">Ventas</a></li>
-          <li class="nav-item"><a class="nav-link" href="/servicios">Servicios</a></li>
-          <li class="nav-item"><a class="nav-link" href="/financiamiento">Financiamiento</a></li>
-          <li class="nav-item"><a class="nav-link" href="/gestion">Gestión</a></li>
-          <li class="nav-item"><a class="nav-link" href="/contacto">Contacto</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard">Pagina Admin</a></li>
-
-        </ul>
-    </div>
-  </nav>
+   <!-- ====== NAVBAR ====== -->
+<div th:replace="fragments/header :: header"></div>
 
   <div id="contenido">
     <!-- Hero + Carrusel -->

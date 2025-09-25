@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org" lang="es"> 
+    <header th:fragment="header"> 
+        <div class="navbar d-flex align-items-center py-3" style="justify-content: flex-start !important" >
+             <!-- boton menu -->
+               <button class="navbar-toggler text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" >
+                 <span class="fas fa-bars"></span> 
+                </button>
+                 <!-- Logo --> 
+                  <a href="/index" class="navbar-brand fw-bold me-2"> 
+                    <i class="fas fa-car-side"></i> AutoTec Motors </a> 
+                </div>
+                 <!-- Menú lateral Offcanvas (fuera de cualquier container) --> 
+                  <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel" >
+                     <div class="offcanvas-header"> <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5> 
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar" >
+
+                        </button> 
+                    </div>
+                     <div class="offcanvas-body">
+                         <ul class="list-unstyled"> 
+                            <li>
+                                <a href="/index" class="dropdown-item text-white">Inicio </a></li> 
+                            <li> <a href="/modelos" class="dropdown-item text-white">Modelos</a></li> 
+                             <li><a href="/ventas" class="dropdown-item text-white">Ventas</a></li> 
+                             <li> <a href="/servicios" class="dropdown-item text-white">Servicios</a> </li> 
+                             <li> <a href="/financiamiento" class="dropdown-item text-white" >Financiamiento</a > </li> 
+                                <li> <a href="/gestion" class="dropdown-item text-white">Gestión</a> </li> 
+                                <li> <a href="/contacto" class="dropdown-item text-white">Contacto</a> </li> 
+                            </ul> 
+                        </div> 
+                    </div> 
+                </header> 
+                </html>

@@ -15,53 +15,8 @@
   <link rel="stylesheet" href="/css/modelos.css">
 </head>
 <body>
-  <!-- ==============================
-       ✅ Navbar
-       ============================== -->
-    <nav class="navbar navbar-expand-lg">
-      <ul class="navbar-nav ms-auto">
-  <!-- Carrito -->
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      🛒 Carrito <span id="cartCount" class="badge bg-warning text-dark">0</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown" id="cartList">
-      <li><span class="dropdown-item">Carrito vacío</span></li>
-    </ul>
-  </li>
-
-  <!-- Favoritos -->
-  <li class="nav-item dropdown ms-3">
-    <a class="nav-link dropdown-toggle" href="#" id="favDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      ⭐ Favoritos <span id="favCount" class="badge bg-info text-dark">0</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="favDropdown" id="favList">
-      <li><span class="dropdown-item">Sin favoritos</span></li>
-    </ul>
-  </li>
-</ul>
-
-    <div class="container">
-      <a href="/index" class="navbar-brand fw-bold">
-        <i class="fas fa-car-side"></i> AutoTec Motors
-      </a>
-      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="fas fa-bars"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto gap-3">
-          <li><a href="/index" class="nav-link">Inicio</a></li>
-          <li><a href="/modelos" class="nav-link">Modelos</a></li>
-          <li><a href="/ventas" class="nav-link active">Ventas</a></li>
-          <li><a href="/servicios" class="nav-link">Servicios</a></li>
-          <li><a href="/financiamiento" class="nav-link">Financiamiento</a></li>
-          <li><a href="/gestion" class="nav-link">Gestión</a></li>
-          <li><a href="/contacto" class="nav-link">Contacto</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+   <!-- ====== NAVBAR ====== -->
+<div th:replace="fragments/header :: header"></div>
 
   <!-- Catálogo -->
   <div class="container my-5">
