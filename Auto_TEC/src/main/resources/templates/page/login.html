@@ -1,0 +1,24 @@
+<!-- archivo: fragments.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <!-- Fragmento para login -->
+    <div th:fragment="loginForm">
+        <div class="form-container">
+            <h1>Iniciar Sesión</h1>
+            <form th:action="@{/login}" method="post">
+                <input type="email" name="email" placeholder="Correo" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button class="btn-login" type="submit">Entrar</button>
+            </form>
+            <p th:if="${error}" style="color:red;" th:text="${error}"></p>
+            <p>¿No tienes cuenta? <a href="/registro">Regístrate</a></p>
+        </div>
+    </div>
+</body>
+</html>
