@@ -21,6 +21,7 @@
             margin: 0;
             padding-top: 56px;
             scroll-behavior: smooth;
+             padding: 0;
         }
 
         a {
@@ -35,7 +36,7 @@
         }
 
        
-    /* --- Navbar --- */
+       /* --- Navbar --- */
     .navbar {
       background: #000;
       border-bottom: 2px solid #d4af37; /* dorado */
