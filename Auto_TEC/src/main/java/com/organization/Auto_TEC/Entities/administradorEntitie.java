@@ -12,9 +12,9 @@ public class administradorEntitie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name = "roles_id", nullable = false)
-    private Rol rol = Rol.USUARIO; 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn( nullable = false)
+    private Rol rol; 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamentos_id", nullable = false)

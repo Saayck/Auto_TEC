@@ -11,9 +11,9 @@ public class usuarioEntitie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "roles_id", nullable = false)
-    private Rol rol = Rol.USUARIO; 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
+    private Rol rol; 
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamento_id", nullable = false, unique = true)
@@ -56,7 +56,7 @@ public class usuarioEntitie {
                           boolean activo,
                           OffsetDateTime ultimoLogin) {
         this.id = id;
-        this.rol = (rol != null) ? rol : Rol.USUARIO;
+        this.rol = rol;
         this.deparmamento = departamento;
         this.username = username;
         this.passwordHash = passwordHash;

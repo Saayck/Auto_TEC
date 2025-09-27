@@ -4,11 +4,12 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,9 +19,9 @@ public class empleadoEntitie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name = "roles_id", nullable = false)
-    private Rol rol = Rol.VENDEDOR;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
+    private Rol rol;
 
     @Column(name = "nombres", length = 100, nullable = false)
     private String nombres;
@@ -51,7 +52,7 @@ public class empleadoEntitie {
                boolean activo,
                LocalDate fechaContratacion) {
     this.id = id;
-    this.rol = (rol != null) ? rol : Rol.VENDEDOR;
+    this.rol = rol;
     this.nombres = nombres;
     this.apellidos = apellidos;
     this.email = email;
