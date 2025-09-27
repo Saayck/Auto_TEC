@@ -41,5 +41,14 @@ public class paginaController {
     @GetMapping("/login")
         public String login(){
         return "page/login";
-      }
+    }
+
+    @GetMapping("/registro")
+        public String registro(){
+        return "page/registro";
+    }
+    @GetMapping("/dashboard")
+        public String admin(){
+        return "admin/dashboard";
+    }
 }
