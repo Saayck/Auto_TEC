@@ -15,11 +15,15 @@ public class usuarioEntitie {
     @Column(name = "roles_id", nullable = false)
     private Rol rol = Rol.USUARIO; 
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id", nullable = false, unique = true)
+    private Departamentos deparmamento;
+
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
     @Column(name = "password_hash", nullable = false, length = 255)
-    private String passwordHash; // mejor en camelCase
+    private String passwordHash; 
 
     @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
@@ -43,6 +47,7 @@ public class usuarioEntitie {
     public usuarioEntitie() {}
     public usuarioEntitie(Long id,
                           Rol rol,
+                          Departamentos departamento,
                           String username,
                           String passwordHash,
                           String email,
@@ -52,6 +57,7 @@ public class usuarioEntitie {
                           OffsetDateTime ultimoLogin) {
         this.id = id;
         this.rol = (rol != null) ? rol : Rol.USUARIO;
+        this.deparmamento = departamento;
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;
@@ -78,6 +84,14 @@ public class usuarioEntitie {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public Departamentos getDepartamentos(){
+        return deparmamento;
+    }
+
+    public void setDepartamentos(Departamentos deparmamento){
+        this.deparmamento = deparmamento;
+    }   
 
     public String getUsername() {
         return username;

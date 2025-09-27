@@ -36,24 +36,23 @@ CREATE TABLE financiamiento (
   plazo_min INTEGER NOT NULL,
   plazo_max INTEGER NOT NULL,
   enganche_minimo DECIMAL(5,2) NOT NULL,
-  requisitos TEXT,
+  requisitos TEXT uniq,
   activo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabla de empleados
 CREATE TABLE empleados (
   id SERIAL PRIMARY KEY,
-  nombre VARCHAR(100) NOT NULL,
-  apellidos VARCHAR(100) NOT NULL,
   roles_id INTEGER REFERENCES roles(id),
+  nombres VARCHAR(100) NOT NULL,
+  apellidos VARCHAR(100) NOT NULL,
   email VARCHAR(100) UNIQUE,
   telefono VARCHAR(20),
-  extension VARCHAR(10),
   activo BOOLEAN DEFAULT TRUE,
   fecha_contratacion DATE
 );
 
--- Tabla de modelos de vehículos
+-- Tabla de modelos de vehículos¿
 CREATE TABLE modelos (
  id BIGSERIAL PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
@@ -76,7 +75,7 @@ CREATE TABLE modelos (
 -- Tabla de administradores
 CREATE TABLE administradores (
   id BIGSERIAL PRIMARY KEY,
-  usuario_id BIGINT REFERENCES usuarios(id) UNIQUE NOT NULL,
+  roles_id INTEGER REFERENCES roles(id) NOT NULL,
   departamentos_id INTEGER REFERENCES departamentos(id),
   fecha_creacion TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   activo BOOLEAN DEFAULT TRUE
@@ -97,7 +96,7 @@ CREATE TABLE logs_administrativos (
 CREATE TABLE inventario (
   id BIGSERIAL PRIMARY KEY,
   modelo_id BIGINT REFERENCES modelos(id) NOT NULL, 
-  cantidad INTEGER NOT NULL DEFAULT 0,
+  cantidad INT NOT NULL DEFAULT 0,
   ubicacion VARCHAR(50),
   fecha_actualizacion TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   UNIQUE(modelo_id, ubicacion) 
@@ -128,23 +127,23 @@ CREATE TABLE ventas (
   cliente_id BIGINT REFERENCES usuarios(id),
   modelo_id BIGINT REFERENCES modelos(id),
   vendedor_id BIGINT REFERENCES usuarios(id),
+  metodo_pago_id BIGINT REFERENCES metodos_pago(id),
   fecha_venta TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   precio_venta DECIMAL(10,2) NOT NULL,
-  estado VARCHAR(20) DEFAULT 'reservado' CHECK (estado IN ('reservado', 'confirmado', 'entregado', 'cancelado')),
-  metodo_pago VARCHAR(50),
+  estado VARCHAR(20) DEFAULT 'RESERVADO' CHECK (estado IN ('RESERVADO', 'CONFIRMADO', 'ENTREGADO', 'CANCELADO')),
   comision_vendedor DECIMAL(10,2),
   notas TEXT
 );
 
 -- Tabla de pagos realizados
-CREATE TABLE pagos (
-  id SERIAL PRIMARY KEY,
-  venta_id BIGINT REFERENCES ventas(id),
-  metodo_pago_id INTEGER REFERENCES metodos_pago(id),
-  monto DECIMAL(12,2) NOT NULL,
-  fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- estado_pago VARCHAR(20) CHECK (estado_pago IN ('pendiente', 'completado', 'fallido')) DEFAULT 'pendiente'
-);
+  CREATE TABLE pagos (
+    id SERIAL PRIMARY KEY,
+    venta_id BIGINT REFERENCES ventas(id),
+    metodo_pago_id INTEGER REFERENCES metodos_pago(id),
+    monto DECIMAL(12,2) NOT NULL,
+    fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estado_pago VARCHAR(20) CHECK (estado_pago IN ('PENDIENTE', 'COMPLETADO', 'FALLIDO')) DEFAULT 'PENDIENTE'
+  );
 
 -- Tabla de sesiones de usuario
 CREATE TABLE sesiones (
@@ -163,7 +162,7 @@ CREATE TABLE carrito (
   id SERIAL PRIMARY KEY,
   session_id VARCHAR(100) NOT NULL,
   modelo_id BIGINT REFERENCES modelos(id),
-  cantidad INTEGER DEFAULT 1,
+  cantidad INTEGER DEFAULT 0 ,
   fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -33,33 +33,33 @@ public class clienteEntities {
     private String direccion;
 
     @Column(name = "tipo_documento", nullable = false, length = 20)
-    private String tipoDocumento = "DNI";
+    private String tipo_documento = "DNI";
 
     @Column(name = "numero_documento", nullable = false, length = 8, unique = true)
-    private String numeroDocumento;
+    private String numero_documento;
 
     @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private LocalDate fecha_nacimiento;
 
     @CreationTimestamp
     @Column(name = "fecha_registro")
-    private OffsetDateTime fechaRegistro;
+    private OffsetDateTime fecha_registro;
 
     public clienteEntities() {}
     public clienteEntities(Long id,
                            usuarioEntitie usuario,
                            String telefono,
                            String direccion,
-                           String tipoDocumento,
-                           String numeroDocumento,
-                           LocalDate fechaNacimiento) {
+                           String tipo_documento,
+                           String numero_documento,
+                           LocalDate fecha_nacimiento) {
         this.id = id;
         this.usuario = usuario;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.tipoDocumento = (tipoDocumento != null) ? tipoDocumento : "DNI";
-        this.numeroDocumento = numeroDocumento;
-        this.fechaNacimiento = fechaNacimiento;
+        this.tipo_documento = (tipo_documento != null) ? tipo_documento : "DNI";
+        this.numero_documento = numero_documento;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
     public Long getId() {
         return id;
@@ -93,35 +93,35 @@ public class clienteEntities {
         this.direccion = direccion;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
+    public String getTipo_documento() {
+        return tipo_documento;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public void setTipo_documento(String tipo_documento) {
+        this.tipo_documento = tipo_documento;
     }
 
-    public String getNumeroDocumento() {
-        return numeroDocumento;
+    public String getNumero_documento() {
+        return numero_documento;
     }
 
-    public void setNumeroDocumento(String numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
+    public void setNumero_documento(String numero_documento) {
+        this.numero_documento = numero_documento;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public OffsetDateTime getFechaRegistro() {
-        return fechaRegistro;
+    public OffsetDateTime getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFechaRegistro(OffsetDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setFecha_registro(OffsetDateTime fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 }
