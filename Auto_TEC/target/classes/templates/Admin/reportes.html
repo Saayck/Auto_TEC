@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Solicitudes - Super Autos</title>
+  <link rel="stylesheet" href="/reporte.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Super Autos</h2>
+    <nav>
+      <ul>
+        <li>📊 Reporte de Ventas</li>
+        <li class="active">📑 Reporte de Solicitudes</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header>
+      <h1>Reporte de Solicitudes</h1>
+    </header>
+
+    <!-- Indicadores -->
+    <section class="cards">
+      <div class="card" id="totalSolicitudes">Total Solicitudes: 0</div>
+      <div class="card" id="pendientes">Pendientes: 0</div>
+      <div class="card" id="aprobadas">Aprobadas: 0</div>
+      <div class="card" id="rechazadas">Rechazadas: 0</div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters">
+      <input type="text" id="filtroCliente" placeholder="Buscar por cliente...">
+      <select id="filtroEstado">
+        <option value="">Todos</option>
+        <option value="Pendiente">Pendiente</option>
+        <option value="Aprobada">Aprobada</option>
+        <option value="Rechazada">Rechazada</option>
+      </select>
+      <input type="date" id="filtroFechaInicio">
+      <input type="date" id="filtroFechaFin">
+      <button onclick="aplicarFiltros()">Aplicar Filtros</button>
+      <button onclick="exportarCSV()">Exportar CSV</button>
+    </section>
+
+    <!-- Tabla -->
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Auto Solicitado</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="tablaSolicitudes">
+          <!-- JS llenará -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Gráficas -->
+    <section class="charts">
+      <canvas id="solicitudesEstado"></canvas>
+      <canvas id="solicitudesMes"></canvas>
+    </section>
+  </main>
+
+  <script src="/reporte.js"></script>
+</body>
+</html>
