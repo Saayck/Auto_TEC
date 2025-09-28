@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Ventas - Super Autos</title>
+  <link rel="stylesheet" href="gestion_ventas.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Super Autos</h2>
+    <nav>
+      <ul>
+        <li class="active">📊 Reporte de Ventas</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header>
+      <h1>Reporte de Ventas</h1>
+    </header>
+
+    <!-- Indicadores -->
+    <section class="cards">
+      <div class="card" id="totalVentas">Total Ventas: 0</div>
+      <div class="card" id="ingresos">Ingresos: $0</div>
+      <div class="card" id="promedio">Promedio: $0</div>
+      <div class="card" id="ventasHoy">Ventas Hoy: 0</div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters">
+      <input type="text" id="filtroCliente" placeholder="Buscar por cliente...">
+      <input type="date" id="filtroFechaInicio">
+      <input type="date" id="filtroFechaFin">
+      <button onclick="aplicarFiltros()">Aplicar Filtros</button>
+      <button onclick="exportarCSV()">Exportar CSV</button>
+    </section>
+
+    <!-- Tabla -->
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Auto</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="tablaVentas">
+          <!-- JS llenará -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Gráficas -->
+    <section class="charts">
+      <canvas id="ventasMes"></canvas>
+      <canvas id="ventasCliente"></canvas>
+    </section>
+  </main>
+
+  <script src="/reporte_ventas.js"></script>
+</body>
+</html>
