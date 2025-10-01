@@ -5,7 +5,7 @@ import java.time.OffsetDateTime;
 public class SesionDTO {
     private Long id;
     private Long usuarioId;
-    private String sessionToken;
+    private String token;
     private OffsetDateTime fechaCreacion;
     private OffsetDateTime fechaExpiracion;
     private boolean activa;
@@ -16,11 +16,11 @@ public class SesionDTO {
     public SesionDTO() {}
 
     // Constructor con todos los campos
-    public SesionDTO(Long id, Long usuarioId, String sessionToken, OffsetDateTime fechaCreacion,
+    public SesionDTO(Long id, Long usuarioId, String token, OffsetDateTime fechaCreacion,
                     OffsetDateTime fechaExpiracion, boolean activa, String ipAddress, String userAgent) {
         this.id = id;
         this.usuarioId = usuarioId;
-        this.sessionToken = sessionToken;
+        this.token = token;
         this.fechaCreacion = fechaCreacion;
         this.fechaExpiracion = fechaExpiracion;
         this.activa = activa;
@@ -45,10 +45,10 @@ public class SesionDTO {
     }
 
     // Constructor para creación (sin ID ni fechaCreacion)
-    public SesionDTO(Long usuarioId, String sessionToken, OffsetDateTime fechaExpiracion,
+    public SesionDTO(Long usuarioId, String token, OffsetDateTime fechaExpiracion,
                     boolean activa, String ipAddress, String userAgent) {
         this.usuarioId = usuarioId;
-        this.sessionToken = sessionToken;
+        this.token = token;
         this.fechaExpiracion = fechaExpiracion;
         this.activa = activa;
         this.ipAddress = ipAddress;
@@ -56,9 +56,9 @@ public class SesionDTO {
     }
 
     // Constructor simplificado para login
-    public SesionDTO(Long usuarioId, String sessionToken, OffsetDateTime fechaExpiracion) {
+    public SesionDTO(Long usuarioId, String token, OffsetDateTime fechaExpiracion) {
         this.usuarioId = usuarioId;
-        this.sessionToken = sessionToken;
+        this.token = token;
         this.fechaExpiracion = fechaExpiracion;
         this.activa = true;
     }
@@ -81,13 +81,12 @@ public class SesionDTO {
     }
 
     public String getSessionToken() {
-        return sessionToken;
+        return token;
     }
 
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
+    public void setSessionToken(String token) {
+        this.token = token;
     }
-
     public OffsetDateTime getFechaCreacion() {
         return fechaCreacion;
     }

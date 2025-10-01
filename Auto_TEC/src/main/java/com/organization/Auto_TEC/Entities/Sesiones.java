@@ -18,8 +18,8 @@ public class Sesiones {
     @JoinColumn(name = "usuario_id")
     private usuarioEntitie usuario;
 
-    @Column(name = "session_token", length = 255, nullable = false, unique = true)
-    private String sessionToken;
+    @Column(name = "token", nullable = false, length = 64, unique = true) // <-- CLAVE
+    private String token;
 
     @CreationTimestamp
     @Column(name = "fecha_creacion", updatable = false)
@@ -40,13 +40,13 @@ public class Sesiones {
     public Sesiones() {}
 
     public Sesiones(usuarioEntitie usuario,
-                  String sessionToken,
+                  String token,
                   OffsetDateTime fechaExpiracion,
                   boolean activa,
                   String ipAddress,
                   String userAgent) {
         this.usuario = usuario;
-        this.sessionToken = sessionToken;
+        this.token = token;
         this.fechaExpiracion = fechaExpiracion;
         this.activa = activa;
         this.ipAddress = ipAddress;
@@ -59,8 +59,8 @@ public class Sesiones {
     public usuarioEntitie getUsuario() { return usuario; }
     public void setUsuario(usuarioEntitie usuario) { this.usuario = usuario; }
 
-    public String getSessionToken() { return sessionToken; }
-    public void setSessionToken(String sessionToken) { this.sessionToken = sessionToken; }
+    public String getSessionToken() { return token; }
+    public void setSessionToken(String sessionToken) { this.token = sessionToken; }
 
     public OffsetDateTime getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(OffsetDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
