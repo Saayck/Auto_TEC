@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<header th:fragment="header-admin">
+  <div class="navbar d-flex align-items-center py-3" style="justify-content: flex-start !important">
+    <!-- Botón menú -->
+    <button class="navbar-toggler text-light me-2" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasAdmin" aria-controls="offcanvasAdmin">
+      <span class="fas fa-bars"></span>
+    </button>
+
+    <!-- Logo -->
+    <a href="/admin/dashboard" class="navbar-brand fw-bold me-2 text-warning">
+      <i class="fas fa-tools"></i> Panel Admin - AutoTec
+    </a>
+  </div>
+
+  <!-- Menú lateral Offcanvas -->
+  <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasAdmin"
+    aria-labelledby="offcanvasAdminLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasAdminLabel">Administración</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-unstyled">
+        <li><a href="/admin/dashboard" class="dropdown-item text-white"><i class="fas fa-home me-2"></i> Dashboard</a></li>
+        <li><a href="/admin/usuarios" class="dropdown-item text-white"><i class="fas fa-users me-2"></i> Usuarios</a></li>
+        <li><a href="/admin/autos" class="dropdown-item text-white"><i class="fas fa-car-side me-2"></i> Autos</a></li>
+        <li><a href="/admin/ventas" class="dropdown-item text-white"><i class="fas fa-dollar-sign me-2"></i> Ventas</a></li>
+        <li><a href="/admin/citas" class="dropdown-item text-white"><i class="fas fa-calendar-check me-2"></i> Citas</a></li>
+        <li><a href="/admin/solicitudes" class="dropdown-item text-white"><i class="fas fa-envelope-open-text me-2"></i> Solicitudes</a></li>
+        <li><a href="/admin/reportes" class="dropdown-item text-white"><i class="fas fa-chart-line me-2"></i> Reportes</a></li>
+        <li><a href="/logout" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+</html>
