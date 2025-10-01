@@ -26,6 +26,87 @@
           <p>Disfruta de intereses bajos y accesibles.</p>
         </div>
       </div>
+      <!-- Modal Calculadora de Cuotas -->
+  <div class="modal fade" id="cuotasModal" tabindex="-1" aria-labelledby="cuotasModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cuotasModalLabel">
+            <i class="fas fa-calculator me-2"></i>Calculadora de Cuotas
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="cuotasForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="monto" class="form-label">
+                  <i class="fas fa-dollar-sign me-2"></i>Monto del Vehículo
+                </label>
+                <input type="number" class="form-control" id="monto" placeholder="Ej: 25000" min="1000" step="100" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="inicial" class="form-label">
+                  <i class="fas fa-money-bill-wave me-2"></i>Cuota Inicial
+                </label>
+                <input type="number" class="form-control" id="inicial" placeholder="Ej: 5000" min="0" step="100">
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="plazo" class="form-label">
+                  <i class="fas fa-calendar me-2"></i>Plazo (meses)
+                </label>
+                <select class="form-select" id="plazo" required>
+                  <option value="">Seleccionar plazo</option>
+                  <option value="12">12 meses</option>
+                  <option value="24">24 meses</option>
+                  <option value="36">36 meses</option>
+                  <option value="48">48 meses</option>
+                  <option value="60">60 meses</option>
+                  <option value="72">72 meses</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tasa" class="form-label">
+                  <i class="fas fa-percent me-2"></i>Tasa de Interés Anual (%)
+                </label>
+                <input type="number" class="form-control" id="tasa" placeholder="Ej: 8.5" min="0" max="50" step="0.1" value="8.5" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-calculate">
+              <i class="fas fa-calculator me-2"></i>Calcular Cuotas
+            </button>
+          </form>
+
+          <div id="resultBox" class="result-box">
+            <h5 class="text-center mb-4" style="color: #d4af37;">
+              <i class="fas fa-chart-line me-2"></i>Resultado del Cálculo
+            </h5>
+            <div class="result-item">
+              <span class="result-label">Monto a Financiar:</span>
+              <span class="result-value" id="montoFinanciar">$0.00</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Cuota Mensual:</span>
+              <span class="result-value" id="cuotaMensual">$0.00</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Total de Intereses:</span>
+              <span class="result-value" id="totalIntereses">$0.00</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Total a Pagar:</span>
+              <span class="result-value" id="totalPagar">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
       <div class="col-md-4">
         <div class="feature-card">
           <i class="fas fa-calendar-alt"></i>

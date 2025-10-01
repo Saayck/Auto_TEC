@@ -1,67 +1,85 @@
-
-    /* --- Estilos base --- */
-    html, body {
+ /* --- Estilos base --- */
+   html, body {
       background-color: #0a0a0a;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
       height: 100%;
-      margin: 0;
-      padding: 0;
+  margin: 0;
+  padding: 0;
     }
-    
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
     /* --- Navbar --- */
     .navbar {
       background: #000;
-      border-bottom: 2px solid #d4af37;
+      border-bottom: 2px solid #d4af37; /* dorado */
       box-shadow: 0 0 20px rgba(212,175,55,0.5);
     }
-
+/* --- logo --- */
     .navbar-brand {
       color: #d4af37 !important;
       font-weight: bold;
       font-size: 1.3rem;
-      margin-left: 50px;
+      margin-left: 50px;/* ---ajusta el texto--- */
+      
     }
 
     .navbar-brand i {
       margin-right: 8px;
-      color: #a855f7;
+      color: #a855f7; /* morado */
     }
+.navbar-toggler {
+  margin-left: 20px; /* Mueve el botón a la derecha */
+  
+}
+/* --- Offcanvas personalizado --- */
+.offcanvas {
+  background: #161613 !important;
+  border-right: 2px solid #a855f7;
+  box-shadow: 0 0 20px rgba(168,85,247,0.2);
+}
 
-    .navbar-toggler {
-      margin-left: 20px;
-    }
+.offcanvas-header {
+  background: #10141f;
+  color: #222;
+  border-bottom: 1px solid #a855f7;
+}
 
-    /* --- Offcanvas personalizado --- */
-    .offcanvas {
-      background: #161613 !important;
-      border-right: 2px solid #a855f7;
-      box-shadow: 0 0 20px rgba(168,85,247,0.2);
-    }
+.offcanvas-title {
+  color: #d4af37;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
-    .offcanvas-header {
-      background: #10141f;
-      color: #222;
-      border-bottom: 1px solid #a855f7;
-    }
+.offcanvas .dropdown-item {
+  color: #f5f5f5 !important;
+  font-weight: 500;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  transition: all 0.3s;
+  padding: 10px 18px;
+}
 
-    .offcanvas-title {
-      color: #d4af37;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
+.offcanvas .dropdown-item:hover,
+.offcanvas .dropdown-item:focus {
+  background: linear-gradient(90deg, #d4af37 0%, #a855f7 100%);
+  color: #111 !important;
+  text-shadow: 0 0 10px #d4af37;
+}
 
+.offcanvas .dropdown-item.active {
+  color: #d4af37 !important;
+  background: #222;
+}
+   
     /* --- Sección principal --- */
-    main {
-      flex: 1;
-    }
-
+     main {
+  flex: 1; /* hace que el main ocupe todo el espacio libre */
+}
     h1 {
       text-align: center;
       font-weight: bold;
@@ -76,16 +94,16 @@
       to { text-shadow: 0 0 25px #d4af37, 0 0 40px #a855f7; }
     }
 
-    /* --- Cards con animación --- */
-    .feature-card {
-      background: #111;
-      border-radius: 12px;
-      padding: 30px;
+
+/* --- Cards con animación --- */
+.feature-card {
+  background: #111;
+  border-radius: 12px;
+  padding: 30px;
       text-align: center;
       transition: all 0.4s ease;
       border: 1px solid rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(0,0,0,0.6);
-      cursor: pointer;
     }
 
     .feature-card i {
@@ -106,129 +124,19 @@
       text-shadow: 0 0 15px #d4af37;
     }
 
-    /* --- Modal personalizado --- */
-    .modal-content {
-      background: #111;
-      border: 2px solid #d4af37;
-      box-shadow: 0 0 30px rgba(212,175,55,0.5);
-    }
-
-    .modal-header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border-bottom: 2px solid #a855f7;
-    }
-
-    .modal-title {
-      color: #d4af37;
-      font-weight: bold;
-      text-shadow: 0 0 10px #a855f7;
-    }
-
-    .btn-close {
-      filter: invert(1);
-    }
-
-    .modal-body {
-      background: #0a0a0a;
-      padding: 30px;
-    }
-
-    .form-label {
-      color: #d4af37;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .form-control, .form-select {
-      background: #1a1a1a;
-      border: 1px solid #d4af37;
-      color: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-
-    .form-control:focus, .form-select:focus {
-      background: #222;
-      border-color: #a855f7;
-      box-shadow: 0 0 15px rgba(168,85,247,0.3);
-      color: #fff;
-    }
-
-    .btn-calculate {
-      background: linear-gradient(135deg, #d4af37 0%, #a855f7 100%);
-      border: none;
-      color: #000;
-      font-weight: bold;
-      padding: 12px 30px;
-      border-radius: 8px;
-      transition: all 0.3s;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .btn-calculate:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #d4af37, 0 0 30px #a855f7;
-    }
-
-    .result-box {
-      background: #1a1a1a;
-      border: 2px solid #a855f7;
-      border-radius: 12px;
-      padding: 25px;
-      margin-top: 25px;
-      box-shadow: 0 0 20px rgba(168,85,247,0.3);
-      display: none;
-    }
-
-    .result-box.show {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(212,175,55,0.2);
-    }
-
-    .result-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-
-    .result-label {
-      color: #d4af37;
-      font-weight: 600;
-    }
-
-    .result-value {
-      color: #a855f7;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
     /* --- Footer --- */
     footer {
-      width: 100vw;
-      left: 0;
-      position: relative;
-      text-align: center;
-      padding: 1rem 0;
-      background: #000;
-      border-top: 2px solid #a855f7;
-      box-shadow: 0 0 20px rgba(168,85,247,0.4);
-      margin-top: auto;
-      z-index: 10;
-    }
+  width: 100vw;
+  left: 0;
+  position: relative;
+  text-align: center;
+  padding: 1rem 0;
+  background: #000;
+  border-top: 2px solid #a855f7;
+  box-shadow: 0 0 20px rgba(168,85,247,0.4);
+  margin-top: auto;
+  z-index: 10;
+}
 
     footer p {
       margin: 0;
