@@ -1,61 +1,36 @@
+function filtrarTabla() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const table = document.getElementById('autosTable');
+    const rows = table.getElementsByTagName('tr');
 
-    let autos = [];
-    let idAuto = 1;
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let found = false;
 
-    function renderAutos(){
-      const tbody = document.getElementById('tabla-autos');
-      tbody.innerHTML = '';
-      autos.forEach(auto => {
-        tbody.innerHTML += `
-          <tr>
-            <td>${auto.id}</td>
-            <td><img src="${auto.foto}" alt="${auto.modelo}" class="car-img"></td>
-            <td>${auto.modelo}</td>
-            <td>${auto.marca}</td>
-            <td>$${auto.precio}</td>
-            <td>${auto.estado}</td>
-            <td>
-              <button class="btn btn-edit" onclick="editarAuto(${auto.id})">Editar</button>
-              <button class="btn btn-delete" onclick="eliminarAuto(${auto.id})">Eliminar</button>
-            </td>
-          </tr>`;
-      });
-      actualizarIndicadores();
+        for (let j = 0; j < cells.length; j++) {
+            const cell = cells[j];
+            if (cell) {
+                const textValue = cell.textContent || cell.innerText;
+                if (textValue.toUpperCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        rows[i].style.display = found ? '' : 'none';
     }
+}
 
-    function actualizarIndicadores(){
-      document.getElementById('total-autos').textContent = autos.length;
-      document.getElementById('autos-disponibles').textContent = autos.filter(a => a.estado === 'Disponible').length;
-      document.getElementById('autos-vendidos').textContent = autos.filter(a => a.estado === 'Vendido').length;
+// Auto-hide alert after 5 seconds
+window.onload = function() {
+    const alert = document.querySelector('.alert');
+    if (alert) {
+        setTimeout(() => {
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        }, 5000);
     }
-
-    function abrirModal(){
-      document.getElementById('modal').style.display = 'flex';
-    }
-    function cerrarModal(){
-      document.getElementById('modal').style.display = 'none';
-    }
-
-    function guardarAuto(){
-      const modelo = document.getElementById('modelo').value;
-      const marca = document.getElementById('marca').value;
-      const precio = document.getElementById('precio').value;
-      const foto = document.getElementById('foto').value;
-      const estado = document.getElementById('estado').value;
-
-      autos.push({ id: idAuto++, modelo, marca, precio, foto, estado });
-      cerrarModal();
-      renderAutos();
-    }
-
-    function eliminarAuto(id){
-      autos = autos.filter(a => a.id !== id);
-      renderAutos();
-    }
-
-    function editarAuto(id){
-      alert('Función de edición pendiente para Auto ID: ' + id);
-    }
-
-    renderAutos();
-  
+};

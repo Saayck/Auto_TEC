@@ -1,65 +1,116 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administrador - Gestión de Citas</title>
-  <link rel="stylesheet" href="gestion_citas.css">
+  <title>Gestión de Citas - Auto TEC</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/css/gestion_citas.css">
 </head>
 <body>
-  <aside class="sidebar">
-    <h2>Gestión Citas</h2>
-    <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Citas</a></li>
-      <li><a href="#">Clientes</a></li>
-      <li><a href="#">Servicios</a></li>
-      <li><a href="#">Reportes</a></li>
-    </ul>
-  </aside>
-
-  <main class="main">
-    <div class="header">
-      <h1>Gestión de Citas</h1>
-      <button onclick="abrirModal()">Agendar Cita</button>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2><i class="fas fa-car"></i> Auto TEC</h2>
+      <nav>
+        <a href="/admin/dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+        <a href="/admin/autos" class="menu-item"><i class="fas fa-car"></i><span>Gestión de Autos</span></a>
+        <a href="/admin/clientes" class="menu-item"><i class="fas fa-users"></i><span>Gestión de Clientes</span></a>
+        <a href="/admin/empleados" class="menu-item"><i class="fas fa-user-tie"></i><span>Gestión de Empleados</span></a>
+        <a href="/admin/citas" class="menu-item active"><i class="fas fa-calendar-check"></i><span>Gestión de Citas</span></a>
+        <a href="/admin/ventas" class="menu-item"><i class="fas fa-money-bill-wave"></i><span>Gestión de Ventas</span></a>
+        <a href="/admin/solicitudes" class="menu-item"><i class="fas fa-envelope"></i><span>Gestión de Solicitudes</span></a>
+        <a href="/admin/reportes" class="menu-item"><i class="fas fa-chart-bar"></i><span>Reportes</span></a>
+      </nav>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Cliente</th>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Servicio</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-citas">
-      </tbody>
-    </table>
-  </main>
+    <!-- Main -->
+    <div class="main-content">
+      <div class="header">
+        <h1>Gestión de Citas</h1>
+        <a href="/admin/citas/nuevo" class="btn btn-primary">
+          <i class="fas fa-calendar-plus"></i> Nueva Cita
+        </a>
+      </div>
 
-  <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
-    <div style="background:#1a1a1f; padding:2rem; border-radius:12px; box-shadow:var(--shadow-neon); width:400px;">
-      <h2>Agendar Cita</h2>
-      <input id="cliente" type="text" placeholder="Nombre del Cliente" style="width:100%; margin:0.5rem 0; padding:0.5rem;">
-      <input id="fecha" type="date" style="width:100%; margin:0.5rem 0; padding:0.5rem;">
-      <input id="hora" type="time" style="width:100%; margin:0.5rem 0; padding:0.5rem;">
-      <input id="servicio" type="text" placeholder="Servicio" style="width:100%; margin:0.5rem 0; padding:0.5rem;">
-      <select id="estado" style="width:100%; margin:0.5rem 0; padding:0.5rem;">
-        <option value="Pendiente">Pendiente</option>
-        <option value="Confirmada">Confirmada</option>
-        <option value="Cancelada">Cancelada</option>
-      </select>
-      <div style="margin-top:1rem; text-align:right;">
-        <button class="btn btn-edit" onclick="guardarCita()">Guardar</button>
-        <button class="btn btn-delete" onclick="cerrarModal()">Cancelar</button>
+      <div th:if="${mensaje}" class="alert alert-success">
+        <i class="fas fa-check-circle"></i>
+        <span th:text="${mensaje}">Mensaje</span>
+      </div>
+
+      <div class="section">
+        <div class="filters">
+          <select id="filtroEstado" onchange="filtrarPorEstado()">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="completada">Completada</option>
+            <option value="cancelada">Cancelada</option>
+          </select>
+
+          <select id="filtroTipo" onchange="filtrarPorTipo()">
+            <option value="">Todos los tipos</option>
+            <option value="prueba_manejo">Prueba de Manejo</option>
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="consulta">Consulta</option>
+          </select>
+
+          <input type="date" id="fechaInicio" placeholder="Fecha inicio">
+          <input type="date" id="fechaFin" placeholder="Fecha fin">
+
+          <button onclick="filtrarPorFecha()">
+            <i class="fas fa-filter"></i> Filtrar
+          </button>
+        </div>
+
+        <table id="citasTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Empleado Asignado</th>
+              <th>Fecha y Hora</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Observaciones</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(citas)}">
+              <td colspan="8" class="no-data">
+                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 10px;"></i>
+                <p>No hay citas registradas</p>
+              </td>
+            </tr>
+            <tr th:each="cita : ${citas}">
+              <td th:text="${cita.id}">#001</td>
+              <td th:text="${cita.cliente.nombre + ' ' + cita.cliente.apellido}">Juan Pérez</td>
+              <td th:text="${cita.empleado.nombre + ' ' + cita.empleado.apellido}">Ana Torres</td>
+              <td th:text="${#temporals.format(cita.fechaCita, 'dd/MM/yyyy HH:mm')}">15/12/2024 10:00</td>
+              <td th:text="${cita.tipo}">Prueba de Manejo</td>
+              <td>
+                <span class="badge" th:classappend="${cita.estado}" th:text="${cita.estado}">Pendiente</span>
+              </td>
+              <td th:text="${cita.observaciones}">Cliente interesado en Toyota</td>
+              <td>
+                <div class="actions">
+                  <a th:href="@{/admin/citas/editar/{id}(id=${cita.id})}" class="btn btn-edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a th:href="@{/admin/citas/eliminar/{id}(id=${cita.id})}" class="btn btn-delete"
+                     onclick="return confirm('¿Está seguro de eliminar esta cita?')">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <script src="/gestion_citas.js"></script>
+  <script src="../../static/js/gestion_citas.js"></script>
 </body>
 </html>

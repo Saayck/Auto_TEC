@@ -1,93 +1,159 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel de Administración</title>
-  <link rel="stylesheet" href="/css/dashboard.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Auto TEC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
+  
 </head>
-
 <body>
-  <!-- aquí va el contenido del dashboard (cards, tablas, etc.) -->
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h2>Admin Panel</h2>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fas fa-car"></i> Auto TEC</h2>
+            <nav>
+                <a href="/admin/dashboard" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/admin/autos" class="menu-item">
+                    <i class="fas fa-car"></i>
+                    <span>Gestión de Autos</span>
+                </a>
+                <a href="/admin/clientes" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Gestión de Clientes</span>
+                </a>
+                <a href="/admin/empleados" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Gestión de Empleados</span>
+                </a>
+                <a href="/admin/citas" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Gestión de Citas</span>
+                </a>
+                <a href="/admin/ventas" class="menu-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Gestión de Ventas</span>
+                </a>
+                <a href="/admin/solicitudes" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Gestión de Solicitudes</span>
+                </a>
+                <a href="/admin/reportes" class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span sec:authentication="name">Usuario</span>
+                    <a href="/logout" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card clientes">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Total Clientes</h3>
+                    <div class="value" th:text="${totalClientes}">0</div>
+                </div>
+
+                <div class="stat-card autos">
+                    <div class="icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Total Autos</h3>
+                    <div class="value" th:text="${totalAutos}">0</div>
+                </div>
+
+                <div class="stat-card ventas">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Total Ventas</h3>
+                    <div class="value" th:text="${#numbers.formatCurrency(totalVentas)}">$0</div>
+                </div>
+
+                <div class="stat-card solicitudes">
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Solicitudes Pendientes</h3>
+                    <div class="value" th:text="${solicitudesPendientes}">0</div>
+                </div>
+            </div>
+
+            <!-- Recent Sales -->
+            <div class="section">
+                <h2>Ventas Recientes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Auto</th>
+                            <th>Precio</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="venta : ${ventasRecientes}">
+                            <td th:text="${venta.id}">#001</td>
+                            <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}">Cliente</td>
+                            <td th:text="${venta.auto.marca + ' ' + venta.auto.modelo}">Auto</td>
+                            <td th:text="${#numbers.formatCurrency(venta.precioFinal)}">$0</td>
+                            <td th:text="${#temporals.format(venta.fechaVenta, 'dd/MM/yyyy')}">01/01/2024</td>
+                            <td>
+                                <span class="badge" th:classappend="${venta.estado}" 
+                                      th:text="${venta.estado}">Estado</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pending Appointments -->
+            <div class="section">
+                <h2>Citas Pendientes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cita : ${citasPendientes}">
+                            <td th:text="${cita.id}">#001</td>
+                            <td th:text="${cita.cliente.nombre + ' ' + cita.cliente.apellido}">Cliente</td>
+                            <td th:text="${cita.tipo}">Tipo</td>
+                            <td th:text="${#temporals.format(cita.fechaCita, 'dd/MM/yyyy HH:mm')}">01/01/2024</td>
+                            <td>
+                                <span class="badge pendiente" th:text="${cita.estado}">Pendiente</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <nav class="sidebar-nav">
-      <ul>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/gestion_clientes">Usuarios</a></li>
-        <li><a href="/gestion_empleados">Empleados</a></li>
-        <li><a href="/reportes">Reportes</a></li>
-        <li><a href="/logout">Cerrar sesión</a></li>
-        <li><a href="/index">Inicio</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Header -->
-    <header class="main-header">
-      <h1>Bienvenido, Administrador</h1>
-      <div class="actions">
-        <button class="btn btn-warning btn-login">Añadir nuevo</button>
-        <button class="btn btn-cyan btn-login">Configuraciones</button>
-      </div>
-    </header>
-
-    <!-- Cards Section -->
-    <section class="cards-section">
-      <div class="card visible">
-        <img src="https://via.placeholder.com/400x240" alt="Imagen 1" class="card-img-top" />
-        <div class="card-body">
-          <h5 class="card-title">Resumen General</h5>
-          <p class="card-text">Información breve sobre el estado actual del sistema.</p>
-          <button class="btn-details">Ver detalles</button>
-        </div>
-      </div>
-
-      <div class="card visible">
-        <img src="https://via.placeholder.com/400x240" alt="Imagen 2" class="card-img-top" />
-        <div class="card-body">
-          <h5 class="card-title">Actividad Reciente</h5>
-          <p class="card-text">Últimas acciones realizadas por los usuarios.</p>
-          <button class="btn-details">Ver detalles</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Table Section -->
-    <section class="table-section">
-      <h2>Últimos Usuarios</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Fecha de Registro</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Juan Pérez</td>
-            <td>juan@email.com</td>
-            <td>2025-09-24</td>
-            <td><button class="btn btn-cyan">Ver</button></td>
-          </tr>
-          <tr>
-            <td>Ana López</td>
-            <td>ana@email.com</td>
-            <td>2025-09-23</td>
-            <td><button class="btn btn-cyan">Ver</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
 </body>
-
 </html>

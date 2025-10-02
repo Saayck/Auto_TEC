@@ -21,5 +21,6 @@
             "connectionTimeout": 30000
         }
     ],
-    "livePreview.defaultPreviewPath": "/Auto_TEC/src/main/resources/templates/page/login.html"
+    "livePreview.defaultPreviewPath": "/Auto_TEC/src/main/resources/templates/page/login.html",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Empleados - Auto TEC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/gestion_empleados.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2><i class="fas fa-car"></i> Auto TEC</h2>
+            <nav>
+                <a href="/admin/dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+                <a href="/admin/autos" class="menu-item"><i class="fas fa-car"></i><span>Gestión de Autos</span></a>
+                <a href="/admin/clientes" class="menu-item"><i class="fas fa-users"></i><span>Gestión de Clientes</span></a>
+                <a href="/admin/empleados" class="menu-item active"><i class="fas fa-user-tie"></i><span>Gestión de Empleados</span></a>
+                <a href="/admin/citas" class="menu-item"><i class="fas fa-calendar-check"></i><span>Gestión de Citas</span></a>
+                <a href="/admin/ventas" class="menu-item"><i class="fas fa-money-bill-wave"></i><span>Gestión de Ventas</span></a>
+                <a href="/admin/solicitudes" class="menu-item"><i class="fas fa-envelope"></i><span>Gestión de Solicitudes</span></a>
+                <a href="/admin/reportes" class="menu-item"><i class="fas fa-chart-bar"></i><span>Reportes</span></a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Empleados</h1>
+                <a href="/admin/empleados/nuevo" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Nuevo Empleado
+                </a>
+            </div>
+
+            <div th:if="${mensaje}" class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span th:text="${mensaje}">Mensaje</span>
+            </div>
+
+            <div class="section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, cargo, DNI..." onkeyup="filtrarTabla()">
+                    <button onclick="filtrarTabla()"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+
+                <table id="empleadosTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Completo</th>
+                            <th>DNI</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Cargo</th>
+                            <th>Salario</th>
+                            <th>Fecha Contratación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(empleados)}">
+                            <td colspan="9" class="no-data">
+                                <i class="fas fa-user-slash" style="font-size: 48px; margin-bottom: 10px;"></i>
+                                <p>No hay empleados registrados</p>
+                            </td>
+                        </tr>
+                        <tr th:each="empleado : ${empleados}">
+                            <td th:text="${empleado.id}">#001</td>
+                            <td th:text="${empleado.nombre + ' ' + empleado.apellido}">Juan Pérez</td>
+                            <td th:text="${empleado.dni}">12345678</td>
+                            <td th:text="${empleado.email}">empleado@example.com</td>
+                            <td th:text="${empleado.telefono}">987654321</td>
+                            <td>
+                                <span class="badge" 
+                                      th:classappend="${#strings.toLowerCase(empleado.cargo)}" 
+                                      th:text="${empleado.cargo}">Cargo</span>
+                            </td>
+                            <td th:text="${#numbers.formatCurrency(empleado.salario)}">$2500</td>
+                            <td th:text="${#temporals.format(empleado.fechaContratacion, 'dd/MM/yyyy')}">01/01/2024</td>
+                            <td>
+                                <div class="actions">
+                                    <a th:href="@{/admin/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{/admin/empleados/eliminar/{id}(id=${empleado.id})}" class="btn btn-delete"
+                                       onclick="return confirm('¿Está seguro de eliminar este empleado?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/js/gestion_empleados.js"></script>
+</body>
+</html>

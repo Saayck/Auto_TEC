@@ -1,76 +1,165 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reporte de Solicitudes - Super Autos</title>
-  <link rel="stylesheet" href="/reporte.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Auto TEC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/reportes.css">
 </head>
 <body>
-  <aside class="sidebar">
-    <h2>Super Autos</h2>
-    <nav>
-      <ul>
-        <li>📊 Reporte de Ventas</li>
-        <li class="active">📑 Reporte de Solicitudes</li>
-      </ul>
-    </nav>
-  </aside>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fas fa-car"></i> Auto TEC</h2>
+            <nav>
+                <a href="/admin/dashboard" class="menu-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/admin/autos" class="menu-item">
+                    <i class="fas fa-car"></i>
+                    <span>Gestión de Autos</span>
+                </a>
+                <a href="/admin/clientes" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Gestión de Clientes</span>
+                </a>
+                <a href="/admin/empleados" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Gestión de Empleados</span>
+                </a>
+                <a href="/admin/citas" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Gestión de Citas</span>
+                </a>
+                <a href="/admin/ventas" class="menu-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Gestión de Ventas</span>
+                </a>
+                <a href="/admin/solicitudes" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Gestión de Solicitudes</span>
+                </a>
+                <a href="/admin/reportes" class="menu-item active">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+        </div>
 
-  <main class="main-content">
-    <header>
-      <h1>Reporte de Solicitudes</h1>
-    </header>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Reportes y Estadísticas</h1>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-success" onclick="exportarPDF()">
+                        <i class="fas fa-file-pdf"></i> Exportar PDF
+                    </button>
+                </div>
+            </div>
 
-    <!-- Indicadores -->
-    <section class="cards">
-      <div class="card" id="totalSolicitudes">Total Solicitudes: 0</div>
-      <div class="card" id="pendientes">Pendientes: 0</div>
-      <div class="card" id="aprobadas">Aprobadas: 0</div>
-      <div class="card" id="rechazadas">Rechazadas: 0</div>
-    </section>
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card ventas">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Total Ventas</h3>
+                    <div class="value" th:text="${#numbers.formatCurrency(totalVentas)}">$0</div>
+                </div>
 
-    <!-- Filtros -->
-    <section class="filters">
-      <input type="text" id="filtroCliente" placeholder="Buscar por cliente...">
-      <select id="filtroEstado">
-        <option value="">Todos</option>
-        <option value="Pendiente">Pendiente</option>
-        <option value="Aprobada">Aprobada</option>
-        <option value="Rechazada">Rechazada</option>
-      </select>
-      <input type="date" id="filtroFechaInicio">
-      <input type="date" id="filtroFechaFin">
-      <button onclick="aplicarFiltros()">Aplicar Filtros</button>
-      <button onclick="exportarCSV()">Exportar CSV</button>
-    </section>
+                <div class="stat-card cantidad">
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Cantidad de Ventas</h3>
+                    <div class="value" th:text="${cantidadVentas}">0</div>
+                </div>
 
-    <!-- Tabla -->
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Auto Solicitado</th>
-            <th>Estado</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody id="tablaSolicitudes">
-          <!-- JS llenará -->
-        </tbody>
-      </table>
-    </section>
+                <div class="stat-card autos">
+                    <div class="icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Autos Disponibles</h3>
+                    <div class="value" th:text="${autosDisponibles}">0</div>
+                </div>
+            </div>
 
-    <!-- Gráficas -->
-    <section class="charts">
-      <canvas id="solicitudesEstado"></canvas>
-      <canvas id="solicitudesMes"></canvas>
-    </section>
-  </main>
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h2>Ventas por Mes</h2>
+                    <canvas id="ventasMesChart"></canvas>
+                </div>
 
-  <script src="/reporte.js"></script>
+                <div class="chart-container">
+                    <h2>Ventas por Empleado</h2>
+                    <canvas id="ventasEmpleadoChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="section">
+                <h2>Filtros de Búsqueda</h2>
+                <div class="filters">
+                    <select id="filtroMes">
+                        <option value="">Todos los meses</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    
+                    <input type="date" id="fechaInicio" placeholder="Fecha inicio">
+                    <input type="date" id="fechaFin" placeholder="Fecha fin">
+                    
+                    <button class="btn btn-primary" onclick="filtrarReporte()">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Ventas -->
+            <div class="section">
+                <h2>Detalle de Ventas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Auto</th>
+                            <th>Empleado</th>
+                            <th>Precio</th>
+                            <th>Método Pago</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="venta : ${ventas}">
+                            <td th:text="${venta.id}">#001</td>
+                            <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}">Cliente</td>
+                            <td th:text="${venta.auto.marca + ' ' + venta.auto.modelo}">Auto</td>
+                            <td th:text="${venta.empleado.nombre + ' ' + venta.empleado.apellido}">Empleado</td>
+                            <td th:text="${#numbers.formatCurrency(venta.precioFinal)}">$0</td>
+                            <td th:text="${venta.metodoPago}">Contado</td>
+                            <td th:text="${#temporals.format(venta.fechaVenta, 'dd/MM/yyyy')}">01/01/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/javascript/reportes.js"></script>
 </body>
 </html>
