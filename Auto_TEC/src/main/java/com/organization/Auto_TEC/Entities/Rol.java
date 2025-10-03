@@ -10,13 +10,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Rol { 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-  @Column(name = "nombre",nullable = false, unique = true, length = 50)
-  private String nombre;
+    @Column(name = "nombre", nullable = false, unique = true, length = 20)
+    private String nombre;
 
   public Rol (){}
 

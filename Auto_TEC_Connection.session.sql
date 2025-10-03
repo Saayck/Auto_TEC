@@ -1,7 +1,7 @@
 -- Tabla de roles de usuario
 CREATE TABLE roles (
   id SERIAL PRIMARY KEY,
-  nombre VARCHAR(20) UNIQUE NOT NULL CHECK (nombre IN ('CLIENTE', 'VENDEDOR', 'ADMIN', 'GERENTE'))
+  nombre VARCHAR(50) UNIQUE NOT NULL CHECK (nombre IN ('CLIENTE', 'VENDEDOR', 'ADMIN', 'GERENTE'))
 );
 
 -- Tabla de departamentos
@@ -270,40 +270,36 @@ CREATE TABLE configuraciones (
   descripcion TEXT
 );
 
+-----------------------------------------------------------------------------------------------------------
+
 -- Insertar roles
 INSERT INTO roles (nombre) VALUES 
 ('CLIENTE'),
 ('VENDEDOR'),
 ('ADMIN'),
-('GERENTE')
-ON CONFLICT (nombre) DO NOTHING;
+('GERENTE');
 
--- Insertar departamentos del Perú
+select * from administradores;
+
+-- Insertar departamento
 INSERT INTO departamentos (nombre, descripcion, ubicacion) VALUES 
-('Lima', 'Departamento de Lima', 'Costa central'),
-('Ica', 'Departamento de Ica', 'Costa sur'),
-('Arequipa', 'Departamento de Arequipa', 'Sierra sur'),
-('Cusco', 'Departamento del Cusco', 'Sierra sur'),
-('Piura', 'Departamento de Piura', 'Costa norte'),
-('La Libertad', 'Departamento de La Libertad', 'Costa norte'),
-('Lambayeque', 'Departamento de Lambayeque', 'Costa norte'),
-('Junín', 'Departamento de Junín', 'Sierra central')
-ON CONFLICT (nombre) DO NOTHING;
+('Ica', 'Departamento de Ica', 'Costa sur');
 
-
--- Administrador Alexander
+-- Insertar administrador (CONTRASEÑA: admin123)
 INSERT INTO administradores (
     roles_id,
     departamentos_id,
     username,
     email,
-    password_hash
+    password_hash,
+    activo
 ) VALUES (
     (SELECT id FROM roles WHERE nombre = 'ADMIN'),
     (SELECT id FROM departamentos WHERE nombre = 'Ica'),
     'admin_ica',
     'admin.ica@empresa.com',
-    '$2a$10$OjzyS85.Ezh0a6s.tkoFl.LpnPPnQI.s7KD/baTqAzW1scrgOas.a'
+    '$2a$12$IMQ1LNEfCRsX6RVfgXrvCea9WWjHqmfANo5llX2HN7KysiNf/MSoW',  -- Contraseña: admin123
+    true
 );
 
 -- Ver administrador alexander

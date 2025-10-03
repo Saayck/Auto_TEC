@@ -17,55 +17,69 @@ import com.organization.Auto_TEC.Repository.AdministradorRepository;
 @Configuration
 public class SecurityConfig {
 
-  @Bean
-  public AuthenticationProvider authenticationProvider(
-      @Qualifier("adminUserDetailsService") UserDetailsService uds,
-      PasswordEncoder pe
-  ) {
-    DaoAuthenticationProvider p = new DaoAuthenticationProvider();
-    p.setUserDetailsService(uds);
-    p.setPasswordEncoder(pe);
-    return p;
-  }
+    private final UserDetailsService adminUserDetailsService;
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(12);
-  }
+    // Que sepa aqui falto el inyectar el AdminUserDetailsService
+    public SecurityConfig(@Qualifier("adminUserDetailsService") UserDetailsService adminUserDetailsService) {
+        this.adminUserDetailsService = adminUserDetailsService;
+    }
 
-  // Success handler que audita y redirige a /dashboard
-  @Bean
-  public AuthenticationSuccessHandler adminLoginSuccessHandler(AdministradorRepository adminRepo) {
-    return new AdminLoginSuccessHandler(adminRepo, "/dashboard");
-  }
+    @Bean
+    public AuthenticationProvider authenticationProvider(PasswordEncoder pe) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(adminUserDetailsService);
+        provider.setPasswordEncoder(pe);
+        provider.setHideUserNotFoundExceptions(false); // IMPORTANTE: Para ver errores reales
+        return provider;
+    }
 
-  @Bean
-  public SecurityFilterChain filterChain(
-      HttpSecurity http,
-      AuthenticationProvider provider,
-      AuthenticationSuccessHandler adminLoginSuccessHandler
-  ) throws Exception {
-    http
-      .csrf(csrf -> csrf.disable())
-      .authenticationProvider(provider)
-      .authorizeHttpRequests(auth -> auth
-          .requestMatchers("/css/**","/js/**","/images/**").permitAll()
-          .requestMatchers("/","/animacion", "/index", "/contacto","/gestion",
-                           "/login","/modelos","/registro","/servicios","/ventas","/financiamiento").permitAll()
-          .requestMatchers("/dashboard").hasRole("ADMIN")  
-          .requestMatchers("/admin/**").hasRole("ADMIN")
-          .anyRequest().authenticated()
-      )
-      .formLogin(form -> form
-          .loginPage("/login")
-          .loginProcessingUrl("/login")
-          .usernameParameter("email")
-          .passwordParameter("password")  
-          .successHandler(adminLoginSuccessHandler) 
-          .failureUrl("/login?error")
-          .permitAll()
-      )
-      .logout(l -> l.logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
-    return http.build();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler adminLoginSuccessHandler(AdministradorRepository adminRepo) {
+        return new AdminLoginSuccessHandler(adminRepo, "/dashboard");
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(
+            HttpSecurity http,
+            AuthenticationProvider provider,
+            AuthenticationSuccessHandler adminLoginSuccessHandler
+    ) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .authenticationProvider(provider)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                .requestMatchers("/", "/animacion", "/index", "/contacto", "/gestion",
+                               "/login", "/modelos", "/registro", "/servicios", 
+                               "/ventas", "/financiamiento", "/error").permitAll()
+                .requestMatchers("/dashboard", "/admin/**").hasRole("ADMIN")  
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("email")  // Asegúrate que coincida con tu HTML
+                .passwordParameter("password")  
+                .successHandler(adminLoginSuccessHandler) 
+                .failureUrl("/login?error=true") // Mejorado para debugging
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            )
+            .exceptionHandling(exceptions -> exceptions
+                .accessDeniedPage("/login?accessDenied=true")
+            );
+
+        return http.build();
+    }
 }
