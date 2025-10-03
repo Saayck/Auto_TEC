@@ -269,3 +269,53 @@ CREATE TABLE configuraciones (
   valor TEXT NOT NULL,
   descripcion TEXT
 );
+
+-- Insertar roles
+INSERT INTO roles (nombre) VALUES 
+('CLIENTE'),
+('VENDEDOR'),
+('ADMIN'),
+('GERENTE')
+ON CONFLICT (nombre) DO NOTHING;
+
+-- Insertar departamentos del Perú
+INSERT INTO departamentos (nombre, descripcion, ubicacion) VALUES 
+('Lima', 'Departamento de Lima', 'Costa central'),
+('Ica', 'Departamento de Ica', 'Costa sur'),
+('Arequipa', 'Departamento de Arequipa', 'Sierra sur'),
+('Cusco', 'Departamento del Cusco', 'Sierra sur'),
+('Piura', 'Departamento de Piura', 'Costa norte'),
+('La Libertad', 'Departamento de La Libertad', 'Costa norte'),
+('Lambayeque', 'Departamento de Lambayeque', 'Costa norte'),
+('Junín', 'Departamento de Junín', 'Sierra central')
+ON CONFLICT (nombre) DO NOTHING;
+
+
+-- Administrador Alexander
+INSERT INTO administradores (
+    roles_id,
+    departamentos_id,
+    username,
+    email,
+    password_hash
+) VALUES (
+    (SELECT id FROM roles WHERE nombre = 'ADMIN'),
+    (SELECT id FROM departamentos WHERE nombre = 'Ica'),
+    'admin_ica',
+    'admin.ica@empresa.com',
+    '$2a$10$OjzyS85.Ezh0a6s.tkoFl.LpnPPnQI.s7KD/baTqAzW1scrgOas.a'
+);
+
+-- Ver administrador alexander
+SELECT 
+    a.id,
+    a.username,
+    a.email,
+    a.password_hash,
+    r.nombre AS rol,
+    d.nombre AS departamento,
+    d.ubicacion AS region
+FROM administradores a
+JOIN roles r ON a.roles_id = r.id
+JOIN departamentos d ON a.departamentos_id = d.id
+WHERE a.username = 'admin_ica';
