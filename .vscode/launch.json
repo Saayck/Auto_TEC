@@ -1,6 +1,12 @@
 {
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "PasswordHashExample",
+            "request": "launch",
+            "mainClass": "com.organization.util.PasswordHashExample",
+            "projectName": "Auto_TEC"
+        },
         {
             "type": "java",
             "name": "Spring Boot-AutoTecApplication<Auto_TEC>",
