@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,13 @@ public class AuthService {
 
     private final UsuarioRepository usuarioRepo;
     private final SesionRepository sesionRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(UsuarioRepository usuarioRepo, SesionRepository sesionRepo) {
+
+    public AuthService(UsuarioRepository usuarioRepo, SesionRepository sesionRepo, PasswordEncoder passwordEncoder) {
         this.usuarioRepo = usuarioRepo;
         this.sesionRepo = sesionRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -32,6 +36,10 @@ public class AuthService {
         usuarioEntitie user = usuarioRepo
                 .findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+         if (!passwordEncoder.matches(rawPassword, user.getPasswordHash())) {
+            throw new IllegalArgumentException("Credenciales inválidas");
+        }
 
      
         //revisar si existe sesión activa

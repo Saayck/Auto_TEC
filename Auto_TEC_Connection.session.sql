@@ -307,15 +307,29 @@ INSERT INTO administradores (
 );
 
 -- Ver administrador alexander
-SELECT 
-    a.id,
-    a.username,
-    a.email,
-    a.password_hash,
-    r.nombre AS rol,
-    d.nombre AS departamento,
-    d.ubicacion AS region
-FROM administradores a
-JOIN roles r ON a.roles_id = r.id
-JOIN departamentos d ON a.departamentos_id = d.id
-WHERE a.username = 'admin_ica';
+BEGIN;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+INSERT INTO roles (nombre) VALUES ('ADMIN')
+ON CONFLICT (nombre) DO NOTHING;
+INSERT INTO departamentos (nombre) VALUES ('Ica')
+ON CONFLICT (nombre) DO NOTHING;
+INSERT INTO administradores (
+    roles_id,
+    departamentos_id,
+    username,
+    email,
+    password_hash
+) VALUES (
+    (SELECT id FROM roles WHERE nombre = 'ADMIN'),
+    (SELECT id FROM departamentos WHERE nombre = 'Ica'),
+    'admin_ica',
+    'admin.ica@empresa.com',
+    crypt('admin123', gen_salt('bf', 12))
+)
+ON CONFLICT (email) DO UPDATE
+SET  username         = EXCLUDED.username,
+     roles_id         = EXCLUDED.roles_id,
+     departamentos_id = EXCLUDED.departamentos_id,
+     password_hash    = EXCLUDED.password_hash;
+COMMIT;

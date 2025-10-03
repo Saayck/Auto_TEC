@@ -1,4 +1,4 @@
-package com.organization.Auto_TEC.Configuration;
+package com.organization.Auto_TEC.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
