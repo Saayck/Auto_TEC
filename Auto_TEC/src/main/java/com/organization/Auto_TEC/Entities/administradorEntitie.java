@@ -23,8 +23,8 @@ public class administradorEntitie {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "roles_id", nullable = false)
-    private Rol rol; 
+    @JoinColumn(nullable = false)
+    private Rol rol;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departamentos_id")
