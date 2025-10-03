@@ -77,6 +77,9 @@ CREATE TABLE administradores (
   id BIGSERIAL PRIMARY KEY,
   roles_id INTEGER REFERENCES roles(id) NOT NULL,
   departamentos_id INTEGER REFERENCES departamentos(id),
+  username VARCHAR(50) UNIQUE,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
   fecha_creacion TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   activo BOOLEAN DEFAULT TRUE
 );
