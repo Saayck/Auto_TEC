@@ -67,7 +67,6 @@ public class usuarioEntitie {
         this.ultimoLogin = ultimoLogin;
     }
 
-    // ===== Getters y Setters =====
 
     public Long getId() {
         return id;

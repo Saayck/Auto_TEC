@@ -9,4 +9,6 @@ import com.organization.Auto_TEC.Entities.Sesiones;
 public interface SesionRepository extends JpaRepository<Sesiones, Long> {
     Optional<Sesiones> findFirstByUsuario_IdAndActivaTrue(Long id);
     Optional<Sesiones> findByTokenAndActivaTrue(String token);
+    Optional<Sesiones> findByUsuario_IdAndActivaTrue(Long usuarioId);
+
 }
