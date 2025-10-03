@@ -36,7 +36,7 @@ CREATE TABLE financiamiento (
   plazo_min INTEGER NOT NULL,
   plazo_max INTEGER NOT NULL,
   enganche_minimo DECIMAL(5,2) NOT NULL,
-  requisitos TEXT uniq,
+  requisitos TEXT unique,
   activo BOOLEAN DEFAULT TRUE
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE modelos (
 -- Tabla de administradores
 CREATE TABLE administradores (
   id BIGSERIAL PRIMARY KEY,
-  roles_id INTEGER REFERENCES roles(id) NOT NULL,
+  roles_id INTEGER REFERENCES roles(id),
   departamentos_id INTEGER REFERENCES departamentos(id),
   username VARCHAR(50) UNIQUE,
   email VARCHAR(100) UNIQUE NOT NULL,

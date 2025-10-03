@@ -23,7 +23,7 @@ public class administradorEntitie {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "roles_id",nullable = false)
     private Rol rol;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,6 +45,15 @@ public class administradorEntitie {
 
     @Column(nullable = false)
     private Boolean activo = true;
+
+    @Column(name = "ultimo_login")                
+    private OffsetDateTime ultimoLogin;
+
+    @Column(name = "ultimo_ip", length = 45)       
+    private String ultimoIp;
+
+    @Column(name = "ultimo_user_agent", length = 512) 
+    private String ultimoUserAgent;
 
     public administradorEntitie() { }
 
@@ -80,6 +89,26 @@ public class administradorEntitie {
 
     public void setDepartamento(Departamentos departamento) { 
         this.departamento = departamento; 
+    }
+    public OffsetDateTime getUltimoLogin() {
+        return ultimoLogin;
+    }
+    public void setUltimoLogin(OffsetDateTime ultimoLogin) {
+        this.ultimoLogin = ultimoLogin;
+    }
+
+    public String getUltimoIp() {
+        return ultimoIp;
+    }
+    public void setUltimoIp(String ultimoIp) {
+        this.ultimoIp = ultimoIp;
+    }
+
+    public String getUltimoUserAgent() {
+        return ultimoUserAgent;
+    }
+    public void setUltimoUserAgent(String ultimoUserAgent) {
+        this.ultimoUserAgent = ultimoUserAgent;
     }
 
     public String getUsername() {

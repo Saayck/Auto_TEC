@@ -25,5 +25,4 @@ public class paginaController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-
 }
