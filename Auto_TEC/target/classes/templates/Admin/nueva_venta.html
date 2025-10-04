@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="/css/nueva_venta.css">
 </head>
 <body>
-    <div th:replace="fragments/header_ventas :: header_ventas"></div> 
+    <!-- <div th:replace="fragments/header_ventas :: header_ventas"></div> -->
 
     <div class="container">
         <div class="header">
             <h1>Registrar Nueva Venta</h1>
-            <a href="/admin/gestion_ventas" class="back-link">
+            <a th:href="@{/gestion_ventas}" class="back-link">
                 <i class="fas fa-arrow-left"></i> Volver a la lista
             </a>
         </div>
@@ -52,7 +52,7 @@
                         <option th:each="modelo : ${modelos}" 
                                 th:value="${modelo.id}" 
                                 th:text="${modelo.marca + ' ' + modelo.nombre + ' (' + modelo.anio + ')'}"
-                                th:attr="data-precio=${modelo.precio}, data-color=${modelo.color}">
+                                th:attr="data-precio=${modelo.precio}, data-marca=${modelo.marca}, data-nombre=${modelo.nombre}">
                         </option>
                     </select>
                 </div>
@@ -66,19 +66,37 @@
 
                 <div class="form-group full-width">
                     <label>Vendedor Responsable <span class="required">*</span></label>
-                    <select th:field="*{vendedorId}" required>
+                    <select th:field="*{vendedorId}" id="vendedorSelect" required onchange="mostrarInfoVendedor()">
                         <option value="">Seleccione un vendedor...</option>
-                        <option th:each="empleado : ${empleados}" 
-                                th:value="${empleado.id}" 
-                                th:text="${empleado.nombres + ' ' + empleado.apellidos + ' - ' + empleado.cargo}">
+                        <!-- CAMBIO: empleados por vendedores -->
+                        <option th:each="vendedor : ${vendedores}" 
+                                th:value="${vendedor.id}" 
+                                th:text="${vendedor.nombres + ' ' + vendedor.apellidos + ' - ' + vendedor.cargo}"
+                                th:attr="data-email=${vendedor.email}, 
+                                        data-telefono=${vendedor.telefono},
+                                        data-comision-base=${vendedor.comisionBase},
+                                        data-ventas-mes=${vendedor.ventasEsteMes}">
                         </option>
                     </select>
+                </div>
+
+                <div id="infoVendedor" class="info-box full-width" style="display: none;">
+                    <h3><i class="fas fa-user-tie"></i> Información del Vendedor</h3>
+                    <div class="vendedor-stats">
+                        <p><strong>Email:</strong> <span id="vendedorEmail"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="vendedorTelefono"></span></p>
+                        <p><strong>Comisión Base:</strong> <span id="vendedorComisionBase"></span></p>
+                        <p><strong>Ventas este mes:</strong> <span id="vendedorVentasMes"></span></p>
+                    </div>
+                    <div class="comision-suggestion">
+                        <small><i class="fas fa-lightbulb"></i> <strong>Sugerencia:</strong> Comisión recomendada: <span id="comisionRecomendada">$0.00</span></small>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label>Precio Venta <span class="required">*</span></label>
                     <input type="number" th:field="*{precioVenta}" id="precioVenta" step="0.01" min="0" required 
-                           onchange="actualizarPrecioDisplay()" placeholder="0.00">
+                           oninput="actualizarPrecioDisplay()" onchange="actualizarPrecioDisplay()" placeholder="0.00">
                     <small style="color: #7f8c8d; margin-top: 5px;">Puede ser diferente al precio base por descuentos o extras</small>
                 </div>
 
@@ -119,7 +137,7 @@
             </div>
 
             <div class="button-group">
-                <a href="/admin/gestion_ventas" class="btn btn-secondary">
+                <a th:href="@{admin/gestion_ventas}" class="btn btn-secondary">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
                 <button type="submit" class="btn btn-success">
@@ -130,5 +148,6 @@
     </div>
 
     <script src="/js/nueva_venta.js"></script>
+    <!-- <script th:href="@{/js/nueva_venta.js}"></script> -->
 </body>
 </html>

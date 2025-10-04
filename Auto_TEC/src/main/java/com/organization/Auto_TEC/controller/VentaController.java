@@ -1,11 +1,11 @@
 package com.organization.Auto_TEC.controller;
 
+import java.util.Arrays;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,11 +15,8 @@ public class VentaController {
     public String mostrarFormularioNuevaVenta(Model model) {
         try {
             System.out.println("=== INICIANDO NUEVA_VENTA ===");
-            
-            // Crear datos temporales para prueba
             model.addAttribute("venta", new VentaDTOTemp());
             
-            // Datos temporales para los select - AGREGANDO DNI
             model.addAttribute("clientes", Arrays.asList(
                 new ClienteTemp(1L, "Juan", "Pérez", "12345678", "juan@email.com", "123456789"),
                 new ClienteTemp(2L, "María", "Gómez", "87654321", "maria@email.com", "987654321")
@@ -31,8 +28,8 @@ public class VentaController {
             ));
             
             model.addAttribute("vendedores", Arrays.asList(
-                new VendedorTemp(1L, "Carlos", "López", "Vendedor"),
-                new VendedorTemp(2L, "Ana", "Martínez", "Vendedor")
+                new VendedorTemp(1L, "Carlos", "López", "Vendedor", "carlos@email.com", "555-1234", 500.0, 5),
+                new VendedorTemp(2L, "Ana", "Martínez", "Vendedor", "ana@email.com", "555-5678", 600.0, 8)
             ));
             
             model.addAttribute("metodosPago", Arrays.asList(
@@ -46,7 +43,8 @@ public class VentaController {
         } catch (Exception e) {
             System.out.println("=== ERROR EN NUEVA_VENTA ===");
             e.printStackTrace();
-            throw e;
+            model.addAttribute("error", "Error al cargar el formulario: " + e.getMessage());
+            return "error";
         }
     }
 
@@ -59,7 +57,41 @@ public class VentaController {
         return "admin/gestion_ventas";
     }
     
-    // Clase temporal para la tabla
+    // CLASE VendedorTemp ACTUALIZADA CON TODOS LOS ATRIBUTOS NECESARIOS
+    public static class VendedorTemp {
+        private Long id;
+        private String nombres;
+        private String apellidos;
+        private String cargo;
+        private String email;
+        private String telefono;
+        private Double comisionBase;
+        private Integer ventasEsteMes;
+        
+        public VendedorTemp(Long id, String nombres, String apellidos, String cargo, 
+                           String email, String telefono, Double comisionBase, Integer ventasEsteMes) {
+            this.id = id;
+            this.nombres = nombres;
+            this.apellidos = apellidos;
+            this.cargo = cargo;
+            this.email = email;
+            this.telefono = telefono;
+            this.comisionBase = comisionBase;
+            this.ventasEsteMes = ventasEsteMes;
+        }
+        
+        // Getters
+        public Long getId() { return id; }
+        public String getNombres() { return nombres; }
+        public String getApellidos() { return apellidos; }
+        public String getCargo() { return cargo; }
+        public String getEmail() { return email; }
+        public String getTelefono() { return telefono; }
+        public Double getComisionBase() { return comisionBase; }
+        public Integer getVentasEsteMes() { return ventasEsteMes; }
+    }
+    
+    // Las otras clases se mantienen igual...
     public static class VentaTableTemp {
         private Long id;
         private String cliente;
@@ -70,7 +102,8 @@ public class VentaController {
         private String fechaVenta;
         private String estado;
         
-        public VentaTableTemp(Long id, String cliente, String auto, String vendedor, Double precioFinal, String metodoPago, String fechaVenta, String estado) {
+        public VentaTableTemp(Long id, String cliente, String auto, String vendedor, 
+                             Double precioFinal, String metodoPago, String fechaVenta, String estado) {
             this.id = id;
             this.cliente = cliente;
             this.auto = auto;
@@ -123,12 +156,11 @@ public class VentaController {
         public void setNotas(String notas) { this.notas = notas; }
     }
     
-    // CLASE ACTUALIZADA CON DNI
     public static class ClienteTemp {
         private Long id;
         private String nombres;
         private String apellidos;
-        private String dni;  
+        private String dni;
         private String email;
         private String telefono;
         
@@ -136,7 +168,7 @@ public class VentaController {
             this.id = id;
             this.nombres = nombres;
             this.apellidos = apellidos;
-            this.dni = dni; 
+            this.dni = dni;
             this.email = email;
             this.telefono = telefono;
         }
@@ -144,55 +176,34 @@ public class VentaController {
         public Long getId() { return id; }
         public String getNombres() { return nombres; }
         public String getApellidos() { return apellidos; }
-        public String getDni() { return dni; }  
+        public String getDni() { return dni; }
         public String getEmail() { return email; }
         public String getTelefono() { return telefono; }
     }
     
-    // CLASE ACTUALIZADA CON AÑO Y COLOR
     public static class ModeloTemp {
         private Long id;
         private String nombre;
         private String marca;
         private Double precio;
-        private String anio;    
-        private String color;   
+        private String anio;
+        private String color;
         
         public ModeloTemp(Long id, String nombre, String marca, Double precio, String anio, String color) {
             this.id = id;
             this.nombre = nombre;
             this.marca = marca;
             this.precio = precio;
-            this.anio = anio;   
-            this.color = color;  
+            this.anio = anio;
+            this.color = color;
         }
         
         public Long getId() { return id; }
         public String getNombre() { return nombre; }
         public String getMarca() { return marca; }
         public Double getPrecio() { return precio; }
-        public String getAnio() { return anio; }    
-        public String getColor() { return color; }  
-    }
-    
-    // CLASE ACTUALIZADA CON CARGO
-    public static class VendedorTemp {
-        private Long id;
-        private String nombres;
-        private String apellidos;
-        private String cargo;  
-        
-        public VendedorTemp(Long id, String nombres, String apellidos, String cargo) {
-            this.id = id;
-            this.nombres = nombres;
-            this.apellidos = apellidos;
-            this.cargo = cargo;  
-        }
-        
-        public Long getId() { return id; }
-        public String getNombres() { return nombres; }
-        public String getApellidos() { return apellidos; }
-        public String getCargo() { return cargo; } 
+        public String getAnio() { return anio; }
+        public String getColor() { return color; }
     }
     
     public static class MetodoPagoTemp {
