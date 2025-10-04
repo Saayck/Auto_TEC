@@ -24,46 +24,88 @@ body {
   min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 260px;
-  background: #111;
-  padding: 20px;
-  position: fixed;
-  height: 100vh;
-  overflow-y: auto;
+/* ========================
+   Navbar superior
+======================== */
+.navbar {
+  background-color: #1a1a1f;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-bottom: 20px;
   box-shadow: var(--shadow-neon);
 }
 
-.sidebar h2 {
-  margin-bottom: 30px;
-  font-size: 24px;
-  text-align: center;
-  color: var(--color-primary);
+.navbar .navbar-brand {
+  font-size: 20px;
+  color: var(--color-accent) !important;
+  text-shadow: 0 0 8px var(--color-secondary);
 }
 
-.menu-item {
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-  margin: 8px 0;
-  color: var(--color-text);
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.menu-item:hover,
-.menu-item.active {
-  background: #222;
+.navbar-toggler {
+  border: none;
+  background: transparent;
+  font-size: 20px;
   color: var(--color-secondary);
-  text-shadow: var(--shadow-neon);
-  transform: translateX(5px);
 }
 
-.menu-item i {
-  margin-right: 12px;
-  width: 20px;
+.navbar-toggler:hover {
+  color: var(--color-primary);
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+
+/* ========================
+   Offcanvas Lateral
+======================== */
+.offcanvas {
+  background-color: var(--offcanvas-bg) !important;
+  border-right: 2px solid var(--offcanvas-border);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.offcanvas-header {
+  background-color: #10141f;
+  border-bottom: 1px solid var(--offcanvas-border);
+}
+
+.offcanvas-title {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 0 0 6px var(--color-secondary);
+}
+
+.offcanvas-body {
+  padding-top: 10px;
+}
+
+.offcanvas-body ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.offcanvas .dropdown-item {
+  display: block;
+  padding: 12px 18px;
+  color: var(--color-text);
+  font-weight: 500;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.offcanvas .dropdown-item:hover,
+.offcanvas .dropdown-item:focus {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  color: #111;
+  transform: translateX(4px);
+  text-shadow: 0 0 10px #ffd700;
+}
+
+.offcanvas .dropdown-item.active {
+  background: #222;
+  color: var(--color-accent);
 }
 
 /* Main Content */

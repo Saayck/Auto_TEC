@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Venta - Auto TEC</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/nueva_venta.css">
+    <link rel="stylesheet" href="/css/nueva_venta.css">
 </head>
 <body>
+    <div th:replace="fragments/header_ventas :: header_ventas"></div> 
+
     <div class="container">
         <div class="header">
             <h1>Registrar Nueva Venta</h1>
-            <a href="/admin/ventas" class="back-link">
+            <a href="/admin/gestion_ventas" class="back-link">
                 <i class="fas fa-arrow-left"></i> Volver a la lista
             </a>
         </div>
 
         <div class="alert alert-warning">
             <i class="fas fa-info-circle"></i>
-            <strong>Importante:</strong> Asegúrese de verificar todos los datos antes de registrar la venta. Esta acción actualizará el estado del vehículo.
+            <strong>Importante:</strong> Asegúrese de verificar todos los datos antes de registrar la venta.
         </div>
 
         <form th:action="@{/admin/ventas/guardar}" th:object="${venta}" method="post" onsubmit="return validarFormulario()">
@@ -27,11 +29,11 @@
             <div class="form-grid">
                 <div class="form-group full-width">
                     <label>Cliente <span class="required">*</span></label>
-                    <select th:field="*{cliente.id}" id="clienteSelect" required onchange="mostrarInfoCliente()">
+                    <select th:field="*{clienteId}" id="clienteSelect" required onchange="mostrarInfoCliente()">
                         <option value="">Seleccione un cliente...</option>
                         <option th:each="cliente : ${clientes}" 
                                 th:value="${cliente.id}" 
-                                th:text="${cliente.nombre + ' ' + cliente.apellido + ' - ' + cliente.dni}"
+                                th:text="${cliente.nombres + ' ' + cliente.apellidos + ' - ' + cliente.dni}"
                                 th:attr="data-email=${cliente.email}, data-telefono=${cliente.telefono}">
                         </option>
                     </select>
@@ -44,57 +46,70 @@
                 </div>
 
                 <div class="form-group full-width">
-                    <label>Auto <span class="required">*</span></label>
-                    <select th:field="*{auto.id}" id="autoSelect" required onchange="mostrarInfoAuto()">
-                        <option value="">Seleccione un auto...</option>
-                        <option th:each="auto : ${autos}" 
-                                th:value="${auto.id}" 
-                                th:text="${auto.marca + ' ' + auto.modelo + ' (' + auto.anio + ') - VIN: ' + auto.vin}"
-                                th:attr="data-precio=${auto.precio}, data-color=${auto.color}, data-vin=${auto.vin}">
+                    <label>Modelo <span class="required">*</span></label>
+                    <select th:field="*{modeloId}" id="modeloSelect" required onchange="mostrarInfoModelo()">
+                        <option value="">Seleccione un modelo...</option>
+                        <option th:each="modelo : ${modelos}" 
+                                th:value="${modelo.id}" 
+                                th:text="${modelo.marca + ' ' + modelo.nombre + ' (' + modelo.anio + ')'}"
+                                th:attr="data-precio=${modelo.precio}, data-color=${modelo.color}">
                         </option>
                     </select>
                 </div>
 
-                <div id="infoAuto" class="info-box full-width" style="display: none;">
-                    <h3><i class="fas fa-car"></i> Información del Auto</h3>
-                    <p><strong>Precio Base:</strong> <span id="autoPrecio"></span></p>
-                    <p><strong>Color:</strong> <span id="autoColor"></span></p>
-                    <p><strong>VIN:</strong> <span id="autoVin"></span></p>
+                <div id="infoModelo" class="info-box full-width" style="display: none;">
+                    <h3><i class="fas fa-car"></i> Información del Modelo</h3>
+                    <p><strong>Precio Base:</strong> <span id="modeloPrecio"></span></p>
+                    <p><strong>Marca:</strong> <span id="modeloMarca"></span></p>
+                    <p><strong>Nombre:</strong> <span id="modeloNombre"></span></p>
                 </div>
 
                 <div class="form-group full-width">
                     <label>Vendedor Responsable <span class="required">*</span></label>
-                    <select th:field="*{empleado.id}" required>
+                    <select th:field="*{vendedorId}" required>
                         <option value="">Seleccione un vendedor...</option>
                         <option th:each="empleado : ${empleados}" 
                                 th:value="${empleado.id}" 
-                                th:text="${empleado.nombre + ' ' + empleado.apellido + ' - ' + empleado.cargo}">
+                                th:text="${empleado.nombres + ' ' + empleado.apellidos + ' - ' + empleado.cargo}">
                         </option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Precio Final <span class="required">*</span></label>
-                    <input type="number" th:field="*{precioFinal}" id="precioFinal" step="0.01" min="0" required 
+                    <label>Precio Venta <span class="required">*</span></label>
+                    <input type="number" th:field="*{precioVenta}" id="precioVenta" step="0.01" min="0" required 
                            onchange="actualizarPrecioDisplay()" placeholder="0.00">
                     <small style="color: #7f8c8d; margin-top: 5px;">Puede ser diferente al precio base por descuentos o extras</small>
                 </div>
 
                 <div class="form-group">
                     <label>Método de Pago <span class="required">*</span></label>
-                    <select th:field="*{metodoPago}" required>
+                    <select th:field="*{metodoPagoId}" required>
                         <option value="">Seleccione...</option>
-                        <option value="contado">Contado</option>
-                        <option value="financiado">Financiado</option>
+                        <option th:each="metodo : ${metodosPago}" 
+                                th:value="${metodo.id}" 
+                                th:text="${metodo.nombre}">
+                        </option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Comisión Vendedor</label>
+                    <input type="number" th:field="*{comisionVendedor}" step="0.01" min="0" placeholder="0.00">
                 </div>
 
                 <div class="form-group">
                     <label>Estado de la Venta <span class="required">*</span></label>
                     <select th:field="*{estado}" required>
-                        <option value="completada">Completada</option>
-                        <option value="pendiente">Pendiente</option>
+                        <option value="COMPLETADA">Completada</option>
+                        <option value="PENDIENTE">Pendiente</option>
+                        <option value="CANCELADA">Cancelada</option>
                     </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Notas</label>
+                    <textarea th:field="*{notas}" rows="3" placeholder="Observaciones adicionales..."></textarea>
                 </div>
             </div>
 
@@ -104,7 +119,7 @@
             </div>
 
             <div class="button-group">
-                <a href="/admin/ventas" class="btn btn-secondary">
+                <a href="/admin/gestion_ventas" class="btn btn-secondary">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
                 <button type="submit" class="btn btn-success">
@@ -114,6 +129,6 @@
         </form>
     </div>
 
-    <script src="../../static/javascript/nueva_venta.js"></script>
+    <script src="/js/nueva_venta.js"></script>
 </body>
 </html>

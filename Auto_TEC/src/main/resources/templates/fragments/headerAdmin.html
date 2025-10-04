@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<header th:fragment="header-admin">
+<header th:fragment="headerAdmin">
   <div class="navbar d-flex align-items-center py-3" style="justify-content: flex-start !important">
     <!-- Botón menú -->
     <button class="navbar-toggler text-light me-2" type="button" data-bs-toggle="offcanvas"
@@ -9,7 +9,7 @@
     </button>
 
     <!-- Logo -->
-    <a href="/admin/dashboard" class="navbar-brand fw-bold me-2 text-warning">
+    <a href="/dashboard" class="navbar-brand fw-bold me-2 text-warning">
       <i class="fas fa-tools"></i> Panel Admin - AutoTec
     </a>
   </div>
@@ -23,14 +23,14 @@
     </div>
     <div class="offcanvas-body">
       <ul class="list-unstyled">
-        <li><a href="../Admin/dashboard.html" class="dropdown-item text-white"><i class="fas fa-home me-2"></i> Dashboard</a></li>
-        <li><a href="../Admin/gestion_clientes.html" class="dropdown-item text-white"><i class="fas fa-users me-2"></i> Usuarios</a></li>
-        <li><a href="../Admin/gestion_autos.html" class="dropdown-item text-white"><i class="fas fa-car-side me-2"></i> Autos</a></li>
-        <li><a href="../Admin/gestion_ventas.html" class="dropdown-item text-white"><i class="fas fa-dollar-sign me-2"></i> Ventas</a></li>
-        <li><a href="../Admin/gestion_citas.html" class="dropdown-item text-white"><i class="fas fa-calendar-check me-2"></i> Citas</a></li>
-        <li><a href="../Admin/gestion_solicitudes.html" class="dropdown-item text-white"><i class="fas fa-envelope-open-text me-2"></i> Solicitudes</a></li>
-        <li><a href="../Admin/reportes.html" class="dropdown-item text-white"><i class="fas fa-chart-line me-2"></i> Reportes</a></li>
-        <li><a href="/logout" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión</a></li>
+        <li><a href="/dashboard" class="dropdown-item text-white"><i class="fas fa-home me-2"></i> Dashboard</a></li>
+        <li><a href="/gestion_clientes" class="dropdown-item text-white"><i class="fas fa-users me-2"></i> Usuarios</a></li>
+        <li><a href="/gestion_autos" class="dropdown-item text-white"><i class="fas fa-car-side me-2"></i> Autos</a></li>
+        <li><a href="/gestion_ventas" class="dropdown-item text-white"><i class="fas fa-dollar-sign me-2"></i> Ventas</a></li>
+        <li><a href="/gestion_citas" class="dropdown-item text-white"><i class="fas fa-calendar-check me-2"></i> Citas</a></li>
+        <li><a href="/gestion_solicitudes" class="dropdown-item text-white"><i class="fas fa-envelope-open-text me-2"></i> Solicitudes</a></li>
+        <li><a href="/reportes" class="dropdown-item text-white"><i class="fas fa-chart-line me-2"></i> Reportes</a></li>
+        <li><a href="/index" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión</a></li>
       </ul>
     </div>
   </div>

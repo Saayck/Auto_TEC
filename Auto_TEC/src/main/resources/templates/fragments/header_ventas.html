@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<header th:fragment="header_ventas">
+  <div class="navbar d-flex align-items-center py-3" style="justify-content: flex-start !important">
+    <!-- Botón menú -->
+    <button class="navbar-toggler text-light me-2" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasAdmin" aria-controls="offcanvasAdmin">
+      <span class="fas fa-bars"></span>
+    </button>
+
+    <!-- Logo -->
+    <a href="/gestion_ventas" class="navbar-brand fw-bold me-2 text-warning">
+      <i class="fas fa-tools"></i> Panel Admin - AutoTec
+    </a>
+  </div>
+
+  <!-- Menú lateral Offcanvas -->
+  <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasAdmin"
+    aria-labelledby="offcanvasAdminLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasAdminLabel">Administración</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-unstyled">
+        <li><a href="/gestion_ventas" class="dropdown-item text-white"><i class="fas fa-home me-2"></i> Gestion ventas</a></li>
+        <li><a href="/nueva_venta" class="dropdown-item text-white"><i class="fas fa-users me-2"></i>Nueva venta</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+</html>

@@ -72,3 +72,69 @@ document.getElementById("formAgendaVentas").addEventListener("submit", function 
 
 // Mostrar por defecto formulario de cotización
 mostrarFormularioCotizacion();
+
+function mostrarInfoCliente() {
+    const select = document.getElementById('clienteSelect');
+    const selectedOption = select.options[select.selectedIndex];
+    const infoDiv = document.getElementById('infoCliente');
+    
+    if (selectedOption.value) {
+        document.getElementById('clienteEmail').textContent = selectedOption.getAttribute('data-email');
+        document.getElementById('clienteTelefono').textContent = selectedOption.getAttribute('data-telefono');
+        infoDiv.style.display = 'block';
+    } else {
+        infoDiv.style.display = 'none';
+    }
+}
+
+function mostrarInfoModelo() {
+    const select = document.getElementById('modeloSelect');
+    const selectedOption = select.options[select.selectedIndex];
+    const infoDiv = document.getElementById('infoModelo');
+    
+    if (selectedOption.value) {
+        const precio = selectedOption.getAttribute('data-precio');
+        document.getElementById('modeloPrecio').textContent = '$' + parseFloat(precio).toLocaleString('es-ES');
+        document.getElementById('modeloMarca').textContent = selectedOption.text.split(' ')[0];
+        document.getElementById('modeloNombre').textContent = selectedOption.text.split(' ')[1];
+        infoDiv.style.display = 'block';
+        
+        // Auto-completar precio si está vacío
+        const precioInput = document.getElementById('precioVenta');
+        if (!precioInput.value) {
+            precioInput.value = precio;
+            actualizarPrecioDisplay();
+        }
+    } else {
+        infoDiv.style.display = 'none';
+    }
+}
+
+function actualizarPrecioDisplay() {
+    const precioInput = document.getElementById('precioVenta');
+    const totalDisplay = document.getElementById('totalDisplay');
+    
+    if (precioInput.value) {
+        const precio = parseFloat(precioInput.value);
+        totalDisplay.textContent = '$' + precio.toLocaleString('es-ES', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    } else {
+        totalDisplay.textContent = '$0.00';
+    }
+}
+
+function validarFormulario() {
+    const precio = document.getElementById('precioVenta').value;
+    if (!precio || parseFloat(precio) <= 0) {
+        alert('Por favor ingrese un precio válido mayor a 0');
+        return false;
+    }
+    return true;
+}
+
+// Inicializar display de precio
+document.addEventListener('DOMContentLoaded', function() {
+    actualizarPrecioDisplay();
+});

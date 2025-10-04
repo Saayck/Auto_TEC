@@ -12,7 +12,7 @@ CREATE TABLE departamentos (
   ubicacion VARCHAR(50)
 );
 
--- Tabla de usuarios
+-- Tabla de usuarios (lo que incluye clientes y vendedores)
 CREATE TABLE usuarios (
   id BIGSERIAL PRIMARY KEY,
   roles_id INTEGER REFERENCES roles(id) NOT NULL,
