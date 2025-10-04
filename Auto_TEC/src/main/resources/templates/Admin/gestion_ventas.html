@@ -1,128 +1,111 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Ventas - Auto TEC</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/gestion_ventas.css">
-</head>
-<body>
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h2><i class="fas fa-car"></i> Auto TEC</h2>
-      <nav>
-        <a href="/admin/dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
-        <a href="/admin/autos" class="menu-item"><i class="fas fa-car"></i><span>Gestión de Autos</span></a>
-        <a href="/admin/clientes" class="menu-item"><i class="fas fa-users"></i><span>Gestión de Clientes</span></a>
-        <a href="/admin/empleados" class="menu-item"><i class="fas fa-user-tie"></i><span>Gestión de Empleados</span></a>
-        <a href="/admin/citas" class="menu-item"><i class="fas fa-calendar-check"></i><span>Gestión de Citas</span></a>
-        <a href="/admin/ventas" class="menu-item active"><i class="fas fa-money-bill-wave"></i><span>Gestión de Ventas</span></a>
-        <a href="/admin/solicitudes" class="menu-item"><i class="fas fa-envelope"></i><span>Gestión de Solicitudes</span></a>
-        <a href="/admin/reportes" class="menu-item"><i class="fas fa-chart-bar"></i><span>Reportes</span></a>
-      </nav>
-    </div>
-
-    <!-- Main content -->
-    <div class="main-content">
-      <div class="header">
-        <h1>Gestión de Ventas</h1>
-        <a href="/admin/ventas/nuevo" class="btn btn-primary">
-          <i class="fas fa-plus"></i> Nueva Venta
-        </a>
-      </div>
-
-      <!-- Mensaje de éxito -->
-      <div th:if="${mensaje}" class="alert alert-success">
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org"> 
+  <head> <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Gestión de Ventas - Auto TEC</title>
+       <!-- Bootstrap CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+     <link rel="stylesheet" th:href="@{/css/gestion_ventas.css}"> 
+    </head>
+      <body>
+        <!-- ====== NAVBAR ====== --> 
+         <div th:replace="fragments/headerAdmin :: headerAdmin"></div> 
+         <!-- Main content -->
+           <div class="main-content">
+     <div class="header">
+       <h1>Gestión de Ventas</h1>
+                <a href="/admin/ventas/nuevo" class="btn btn-primary">
+                   <i class="fas fa-plus"> </i> Nueva Venta </a> </div>
+                    <!-- Mensaje de éxito -->
+         <div th:if="${mensaje}" class="alert alert-success"> 
         <i class="fas fa-check-circle"></i>
-        <span th:text="${mensaje}">Mensaje</span>
-      </div>
-
-      <!-- Filtros -->
-      <div class="search-bar">
-        <select id="filtroEstado" onchange="filtrarPorEstado()">
+         <span th:text="${mensaje}">Mensaje</span> 
+        </div>
+       <!-- Filtros --> <div class="search-bar"> 
+         <select id="filtroEstado" onchange="filtrarPorEstado()">
           <option value="">Todos los estados</option>
-          <option value="completada">Completada</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="cancelada">Cancelada</option>
-        </select>
+                              <option value="completada">Completada</option>
+                               <option value="pendiente">Pendiente</option>
+                                <option value="cancelada">Cancelada</option>
+                               </select>
+                                <select id="filtroMetodo" onchange="filtrarPorMetodo()">
+                                   <option value="">Todos los métodos</option> 
+                                   <option value="contado">Contado</option>
+                                    <option value="financiado">Financiado</option> 
+                                  </select>
+                                   <input type="date" id="fechaInicio">
+                                   <input type="date" id="fechaFin"> 
+                                   <button onclick="filtrarPorFecha()">
+                                    <i class="fas fa-filter"></i> Filtrar</button>
+                                     <button onclick="limpiarFiltros()" class="btn-delete">
+                                      <i class="fas fa-times"></i> Limpiar</button>
+                                     </div>
+                                      <!-- Tabla -->
+                                        <div class="section"> 
+                                          <table id="ventasTable">
+                                             <thead>
+                                               <tr> 
+                                                <th>ID</th>
+                                                 <th>Cliente</th>
+                                                  <th>Auto</th>
+                                                   <th>Vendedor</th>
+                                                    <th>Precio Final</th>
+                                                     <th>Método Pago</th>
+                                                      <th>Fecha Venta</th>
+                                                       <th>Estado</th> 
+                                                       <th>Acciones</th>
+                                                       </tr> 
+                                                      </thead>
+                                                        <tbody>
+                                                           <tr th:if="${#lists.isEmpty(ventas)}">
+                                                             <td colspan="9" class="no-data">
+                                                               <i class="fas fa-shopping-cart" style="font-size: 48px; margin-bottom: 10px;">
 
-        <select id="filtroMetodo" onchange="filtrarPorMetodo()">
-          <option value="">Todos los métodos</option>
-          <option value="contado">Contado</option>
-          <option value="financiado">Financiado</option>
-        </select>
+                                                               </i>
+                                                                <p>No hay ventas registradas</p> 
+                                                              </td>
+                                                             </tr>
+                                                              <tr th:each="venta : ${ventas}">
+                                                                 <td th:text="${venta.id}">#001</td>
+                                                                  <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}">Juan Pérez</td>
+                                                                   <td th:text="${venta.auto.marca + ' ' + venta.auto.modelo + ' (' + venta.auto.anio + ')'}">Toyota Corolla</td> 
+                                                                   <td th:text="${venta.empleado.nombre + ' ' + venta.empleado.apellido}">Ana Torres</td>
+                                                                    <td class="price-highlight" th:text="${#numbers.formatCurrency(venta.precioFinal)}">$85,000</td> 
+                                                                    <td th:text="${venta.metodoPago}">Contado</td>
+                                                                     <td th:text="${#temporals.format(venta.fechaVenta, 'dd/MM/yyyy HH:mm')}">15/12/2024</td>
+                                                                      <td> <span class="badge" th:classappend="${venta.estado}" th:text="${venta.estado}">Completada</span>
+                                                                       </td>
+                                                                        <td>
+                                                                           <div class="actions">
+                                                                             <button class="btn btn-edit" onclick="verDetalle(this)" th:attr="data-id=${venta.id}, data-cliente=${venta.cliente.nombre + ' ' + venta.cliente.apellido}, data-auto=${venta.auto.marca + ' ' + venta.auto.modelo}, data-precio=${venta.precioFinal}, data-metodo=${venta.metodoPago}"> 
+                                                                              <i class="fas fa-eye">
 
-        <input type="date" id="fechaInicio">
-        <input type="date" id="fechaFin">
+                                                                              </i> 
+                                                                            </button> 
+                                                                          </div>
+                                                                         </td> 
+                                                                        </tr> 
+                                                                      </tbody> 
+                                                                    </table> 
+                                                                  </div>
+                                                                 </div>
+                                                                 </div>
+                                                                  <!-- Modal --> 
+                                                                   <div id="modalDetalle" class="modal">
+                                                                     <div class="modal-content">
+                                                                       <h2>Detalle de Venta</h2>
+                                                                        <div id="detalleContenido">
 
-        <button onclick="filtrarPorFecha()"><i class="fas fa-filter"></i> Filtrar</button>
-        <button onclick="limpiarFiltros()" class="btn-delete"><i class="fas fa-times"></i> Limpiar</button>
-      </div>
+                                                                        </div> 
+                                                                        <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
+                                                                       </div>
+                                                                       </div> 
+                                                                       <!-- Bootstrap JS -->
+                                                                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                                                                          <script th:href="@{/javascript/gestion_ventas.js}">
 
-      <!-- Tabla -->
-      <div class="section">
-        <table id="ventasTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Cliente</th>
-              <th>Auto</th>
-              <th>Vendedor</th>
-              <th>Precio Final</th>
-              <th>Método Pago</th>
-              <th>Fecha Venta</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:if="${#lists.isEmpty(ventas)}">
-              <td colspan="9" class="no-data">
-                <i class="fas fa-shopping-cart" style="font-size: 48px; margin-bottom: 10px;"></i>
-                <p>No hay ventas registradas</p>
-              </td>
-            </tr>
-            <tr th:each="venta : ${ventas}">
-              <td th:text="${venta.id}">#001</td>
-              <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}">Juan Pérez</td>
-              <td th:text="${venta.auto.marca + ' ' + venta.auto.modelo + ' (' + venta.auto.anio + ')'}">Toyota Corolla</td>
-              <td th:text="${venta.empleado.nombre + ' ' + venta.empleado.apellido}">Ana Torres</td>
-              <td class="price-highlight" th:text="${#numbers.formatCurrency(venta.precioFinal)}">$85,000</td>
-              <td th:text="${venta.metodoPago}">Contado</td>
-              <td th:text="${#temporals.format(venta.fechaVenta, 'dd/MM/yyyy HH:mm')}">15/12/2024</td>
-              <td>
-                <span class="badge" th:classappend="${venta.estado}" th:text="${venta.estado}">Completada</span>
-              </td>
-              <td>
-                <div class="actions">
-                  <button class="btn btn-edit" onclick="verDetalle(this)" 
-                    th:attr="data-id=${venta.id},
-                             data-cliente=${venta.cliente.nombre + ' ' + venta.cliente.apellido},
-                             data-auto=${venta.auto.marca + ' ' + venta.auto.modelo},
-                             data-precio=${venta.precioFinal},
-                             data-metodo=${venta.metodoPago}">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div id="modalDetalle" class="modal">
-    <div class="modal-content">
-      <h2>Detalle de Venta</h2>
-      <div id="detalleContenido"></div>
-      <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
-    </div>
-  </div>
-
-  <script src="../../static/javascript/gestion_ventas.js"></script>
-</body>
-</html>
+                                                                          </script>
+                                                                           </body>
+                                                                            </html>

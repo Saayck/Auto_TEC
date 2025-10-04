@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @Controller
+
 public class paginaController {
    private static final String[] PAGE = {"index","contacto","gestion","login","modelos","registro","servicios","ventas", "financiamiento"};
    private static final String[] ADMIN = {"dashboard","gestion_autos","gestion_citas","gestion_clientes","gestion_empleados","gestion_solicitudes","gestion_ventas","reportes"};
@@ -25,4 +26,8 @@ public class paginaController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
+
 }
+
+
+
