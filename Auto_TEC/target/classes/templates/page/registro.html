@@ -1,29 +1,27 @@
-<!-- archivo: fragments.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Fragments</title>
-    <link rel="stylesheet" href="/css/registro.css">
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="/css/registro.css">
 </head>
 <body>
-<div id="registroForm">
-  <div class="form-container">
-    <h1>Registro</h1>
+  <div id="registroForm">
+    <div class="form-container">
+      <h1>Registro</h1>
 
-    <form action="/registro" method="post">
-      <input type="text" name="username" placeholder="Usuario" required />
+      <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+      <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
 
-      <input type="email" name="email" placeholder="Correo" required />
+      <form action="/registro" method="post">
+        <input type="text" name="username" placeholder="Usuario" required />
+        <input type="email" name="email" placeholder="Correo" required />
+        <input type="password" name="password" placeholder="Contraseña" required minlength="6" />
+        <button class="btn-register" type="submit">Registrar</button>
+      </form>
 
-      <input type="password" name="password" placeholder="Contraseña" required minlength="6" />
-
-      <button class="btn-register" type="submit">Registrar</button>
-    </form>
-
-    <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+      <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+    </div>
   </div>
-</div>
-
 </body>
 </html>

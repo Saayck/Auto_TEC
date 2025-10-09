@@ -29,7 +29,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(adminUserDetailsService);
         provider.setPasswordEncoder(pe);
-        provider.setHideUserNotFoundExceptions(false); // IMPORTANTE: Para ver errores reales
+        provider.setHideUserNotFoundExceptions(false); 
         return provider;
     }
 
