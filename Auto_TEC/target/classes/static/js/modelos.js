@@ -1,54 +1,40 @@
-// ===========================
-// Manejo de favoritos
-// ===========================
-document.querySelectorAll(".btn-favorite").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.toggle("active");
-    if (btn.classList.contains("active")) {
-      btn.innerHTML = '<i class="fa fa-star text-dark"></i>';
-      alert("Añadido a favoritos ⭐");
-    } else {
-      btn.innerHTML = '<i class="fa fa-star"></i>';
-      alert("Eliminado de favoritos ❌");
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll(".modelo-item");
+  const modal = new bootstrap.Modal(document.getElementById("modalModelo"));
+  const modalTitulo = document.getElementById("modalModeloLabel");
+  const modalImagen = document.getElementById("modalImagen");
+  const modalDescripcion = document.getElementById("modalDescripcion");
+
+  // Crear imagen de previsualización
+  const preview = document.createElement("img");
+  preview.className = "preview-img";
+  document.body.appendChild(preview);
+
+  items.forEach(item => {
+    const imgSrc = item.getAttribute("data-img");
+    const desc = item.getAttribute("data-desc");
+
+    // Hover → mostrar previsualización
+    item.addEventListener("mouseenter", e => {
+      preview.src = imgSrc;
+      preview.style.display = "block";
+    });
+
+    // Salir → ocultar previsualización
+    item.addEventListener("mouseleave", () => {
+      preview.style.display = "none";
+    });
+
+    // Click → abrir modal con info
+    item.addEventListener("click", () => {
+      modalTitulo.textContent = item.textContent.trim();
+      modalImagen.src = imgSrc;
+      modalDescripcion.textContent = desc;
+
+      items.forEach(i => i.classList.remove("active"));
+      item.classList.add("active");
+
+      modal.show();
+    });
   });
-});
-
-// ===========================
-// Modal de compra
-// ===========================
-const buyButtons = document.querySelectorAll(".btn-buy");
-const carModelSpan = document.getElementById("carModel");
-
-buyButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const model = button.getAttribute("data-model");
-    carModelSpan.textContent = model;
-  });
-});
-
-// ===========================
-// Animación de scroll
-// ===========================
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    nav.classList.add("shadow-lg");
-  } else {
-    nav.classList.remove("shadow-lg");
-  }
-});
-// ===========================
-// Confirmar compra
-// ===========================
-const confirmBuyBtn = document.getElementById("confirmBuy");
-
-confirmBuyBtn.addEventListener("click", () => {
-  const car = carModelSpan.textContent;
-  if (car) {
-    alert(`🚗 Has iniciado la compra del ${car}. Nuestro equipo se pondrá en contacto contigo.`);
-    // Aquí podrías enviar la compra a una API o backend
-    const modal = bootstrap.Modal.getInstance(document.getElementById("buyModal"));
-    modal.hide(); // cierra el modal luego de confirmar
-  }
 });
