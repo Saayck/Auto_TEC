@@ -2,54 +2,29 @@ package com.organization.Auto_TEC.DTO;
 
 import java.time.OffsetDateTime;
 
-// DTO para respuesta de login (funciona con SesionDTO)
-
 public class LoginResponseDTO {
     private String sessionToken;
-    private OffsetDateTime fechaExpiracion;
-    private Long usuarioId;
-    private String mensaje;
+    private OffsetDateTime expiresAt;
+    private Long userId;
+    private String message;
 
-    // Constructores
-    public LoginResponseDTO() {}
-
-    public LoginResponseDTO(String sessionToken, OffsetDateTime fechaExpiracion, Long usuarioId, String mensaje) {
+    public LoginResponseDTO(String sessionToken, OffsetDateTime expiresAt, Long userId, String message) {
         this.sessionToken = sessionToken;
-        this.fechaExpiracion = fechaExpiracion;
-        this.usuarioId = usuarioId;
-        this.mensaje = mensaje;
+        this.expiresAt = expiresAt;
+        this.userId = userId;
+        this.message = message;
     }
 
-    // Getters y Setters
-    public String getSessionToken() {
-        return sessionToken;
-    }
-
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
-    public OffsetDateTime getFechaExpiracion() {
-        return fechaExpiracion;
-    }
-
-    public void setFechaExpiracion(OffsetDateTime fechaExpiracion) {
-        this.fechaExpiracion = fechaExpiracion;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
+    // Getters y setters
+    public String getSessionToken() { return sessionToken; }
+    public void setSessionToken(String sessionToken) { this.sessionToken = sessionToken; }
+    
+    public OffsetDateTime getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(OffsetDateTime expiresAt) { this.expiresAt = expiresAt; }
+    
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+    
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }

@@ -281,6 +281,9 @@ INSERT INTO roles (nombre) VALUES
 
 select * from administradores;
 
+DROP TABLE IF EXISTS administradores;
+
+
 -- Insertar departamento
 INSERT INTO departamentos (nombre, descripcion, ubicacion) VALUES 
 ('Ica', 'Departamento de Ica', 'Costa sur');

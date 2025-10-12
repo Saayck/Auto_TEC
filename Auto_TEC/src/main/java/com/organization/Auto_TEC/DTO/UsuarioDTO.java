@@ -42,8 +42,8 @@ public class UsuarioDTO {
         Long rolId = entity.getRol() != null ? entity.getRol().getId() : null;
         String rolNombre = entity.getRol() != null ? entity.getRol().getNombre() : null;
         
-        Long departamentoId = entity.getDepartamentos() != null ? entity.getDepartamentos().getId() : null;
-        String departamentoNombre = entity.getDepartamentos() != null ? entity.getDepartamentos().getNombre() : null;
+        Long departamentoId = entity.getDepartamento() != null ? entity.getDepartamento().getId() : null;
+        String departamentoNombre = entity.getDepartamento() != null ? entity.getDepartamento().getNombre() : null;
 
         return new UsuarioDTO(
             entity.getId(),
@@ -61,7 +61,6 @@ public class UsuarioDTO {
         );
     }
 
-    // Resto de constructores, getters y setters se mantienen igual...
     // Constructor para creación (sin ID ni fechas)
     public UsuarioDTO(Long rolId, Long departamentoId, String username, String email, 
                      String nombres, String apellidos, boolean activo) {

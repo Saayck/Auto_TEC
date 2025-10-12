@@ -13,15 +13,9 @@ public class Departamentos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name ="nombre", nullable = false, length = 50, unique = true)
+    
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
-
-    @Column(name = "descripcion", nullable = false, columnDefinition = "TEXT")
-    private String descripcion;
-
-    @Column(name = "ubicacion", nullable = false, length = 50)
-    private String ubicacion;
 
     // Constructor vacío
     public Departamentos() {}
@@ -30,8 +24,6 @@ public class Departamentos {
     public Departamentos(Long id, String nombre, String descripcion, String ubicacion) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.ubicacion = ubicacion;
     }
 
     // ====== Getters y Setters ======
@@ -41,9 +33,4 @@ public class Departamentos {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-
-    public String getUbicacion() { return ubicacion; }
-    public void setUbicacion(String ubicacion) { this.ubicacion = ubicacion; }
 }

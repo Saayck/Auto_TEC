@@ -3,6 +3,7 @@ package com.organization.Auto_TEC.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.organization.Auto_TEC.DTO.RegistroDTO;
 import com.organization.Auto_TEC.Entities.usuarioEntitie;
 
 public interface UsuarioService {
@@ -13,4 +14,6 @@ public interface UsuarioService {
     List<usuarioEntitie> findClientes(); // Usuarios con rol CLIENTE
     List<usuarioEntitie> findVendedores(); // Usuarios con rol VENDEDOR
     List<usuarioEntitie> findByActivoTrue();
+    
+    usuarioEntitie registrarUsuario(RegistroDTO registroDTO);
 }

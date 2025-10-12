@@ -1,8 +1,18 @@
 package com.organization.Auto_TEC.Entities;
 
 import java.time.OffsetDateTime;
+
 import org.hibernate.annotations.CreationTimestamp;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
@@ -12,12 +22,12 @@ public class usuarioEntitie {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol; 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamento_id", nullable = false, unique = true)
-    private Departamentos deparmamento;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id", nullable = true)
+    private Departamentos departamento; 
 
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
@@ -45,9 +55,10 @@ public class usuarioEntitie {
     private OffsetDateTime ultimoLogin;
 
     public usuarioEntitie() {}
+    
     public usuarioEntitie(Long id,
                           Rol rol,
-                          Departamentos departamento,
+                          Departamentos departamento, // Corregido el nombre
                           String username,
                           String passwordHash,
                           String email,
@@ -57,7 +68,7 @@ public class usuarioEntitie {
                           OffsetDateTime ultimoLogin) {
         this.id = id;
         this.rol = rol;
-        this.deparmamento = departamento;
+        this.departamento = departamento; // Corregido el nombre
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;
@@ -67,7 +78,7 @@ public class usuarioEntitie {
         this.ultimoLogin = ultimoLogin;
     }
 
-
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -84,12 +95,12 @@ public class usuarioEntitie {
         this.rol = rol;
     }
 
-    public Departamentos getDepartamentos(){
-        return deparmamento;
+    public Departamentos getDepartamento() { // Corregido el nombre del getter
+        return departamento;
     }
 
-    public void setDepartamentos(Departamentos deparmamento){
-        this.deparmamento = deparmamento;
+    public void setDepartamento(Departamentos departamento) { // Corregido el nombre del setter
+        this.departamento = departamento;
     }   
 
     public String getUsername() {

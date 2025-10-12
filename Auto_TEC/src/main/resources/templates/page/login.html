@@ -1,25 +1,30 @@
-<!-- archivo: fragments.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Fragments</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-    <!-- Fragmento para login -->
     <div th:fragment="loginForm">
         <div class="form-container">
             <h1>Iniciar Sesión</h1>
-                <form method="post" action="/login">
-                    <input type="email"    name="email"    placeholder="Correo" required>
-                    <input type="password" name="password" placeholder="Contraseña" required>
-                    <button type="submit">Ingresar</button>
-                    <div th:if="${param.error}" style="color:#ff6b6b">Credenciales inválidas</div>
-                    <div th:if="${param.logout}" style="color:#4caf50">Sesión cerrada</div>
+            <!-- CAMBIAR EL ACTION DEL FORMULARIO: -->
+            <form method="post" action="/auth/login">
+                <input type="text" name="username" placeholder="Usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+                <div th:if="${param.error}" style="color:#ff6b6b">Credenciales inválidas</div>
+                <div th:if="${param.logout}" style="color:#4caf50">Sesión cerrada</div>
+                <div th:if="${param.registroExitoso}" style="color:#4caf50">
+                    ¡Registro exitoso! Por favor inicia sesión.
+                </div>
+                <div th:if="${param.accessDenied}" style="color:#ff6b6b">
+                    No tienes permisos para acceder a esa página.
+                </div>
             </form>
             <p th:if="${error}" style="color:red;" th:text="${error}"></p>
-            <p>¿No tienes cuenta? <a href="/registro">Regístrate</a></p>
+            <p>¿No tienes cuenta? <a href="/auth/registro">Regístrate</a></p>
         </div>
     </div>
 </body>
